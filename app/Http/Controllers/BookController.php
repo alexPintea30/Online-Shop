@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\category;
+use App\book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
-class categoryController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class categoryController extends Controller
      */
     public function index()
     {
-        //
+        $carte= book::latest()->paginate(12);
+        return view('welcome',compact('carte'));
     }
 
     /**
@@ -41,10 +43,10 @@ class categoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\category  $category
+     * @param  \App\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(category $category)
+    public function show(book $book)
     {
         //
     }
@@ -52,10 +54,10 @@ class categoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\category  $category
+     * @param  \App\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(category $category)
+    public function edit(book $book)
     {
         //
     }
@@ -64,10 +66,10 @@ class categoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\category  $category
+     * @param  \App\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(Request $request, book $book)
     {
         //
     }
@@ -75,10 +77,10 @@ class categoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\category  $category
+     * @param  \App\book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(category $category)
+    public function destroy(book $book)
     {
         //
     }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class person extends Model
+class Person extends Model
 {
     public function autorul(){
         return $this->hasOne(author::class);
@@ -12,6 +12,6 @@ class person extends Model
     }
 
     public function judet(){
-        return $this->hasOne(judet::class);
+        return $this->hasOne(Region::class);
     }
 }

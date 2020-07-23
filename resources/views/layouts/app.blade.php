@@ -31,9 +31,9 @@
 <body>
 <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark" >
      @if(Auth::check())
-        <a href="/home" class="navbar-brand"><img height="90px" src="comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
+        <a href="/home" class="navbar-brand"><img height="90px" src="images/comrawpixel534885.png" alt="nu se poate incarca imaginea" style="padding-left: 30px"></a>
     @else
-        <a href="/" class="navbar-brand"><img height="90px" src="comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
+        <a href="/" class="navbar-brand"><img height="90px" src="images/comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
     @endif
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
         <span class="navbar-toggler-icon"></span>

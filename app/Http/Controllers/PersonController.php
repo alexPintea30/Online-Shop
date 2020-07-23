@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\book;
+use App\person;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
-class bookController extends Controller
+class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class bookController extends Controller
      */
     public function index()
     {
-        $carte= book::latest()->paginate(5);
-        return view('welcome',compact('carte'));
+        //
     }
 
     /**
@@ -43,10 +41,10 @@ class bookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\book  $book
+     * @param  \App\person  $person
      * @return \Illuminate\Http\Response
      */
-    public function show(book $book)
+    public function show(person $person)
     {
         //
     }
@@ -54,10 +52,10 @@ class bookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\book  $book
+     * @param  \App\person  $person
      * @return \Illuminate\Http\Response
      */
-    public function edit(book $book)
+    public function edit(person $person)
     {
         //
     }
@@ -66,10 +64,10 @@ class bookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\book  $book
+     * @param  \App\person  $person
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, book $book)
+    public function update(Request $request, person $person)
     {
         //
     }
@@ -77,10 +75,10 @@ class bookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\book  $book
+     * @param  \App\person  $person
      * @return \Illuminate\Http\Response
      */
-    public function destroy(book $book)
+    public function destroy(person $person)
     {
         //
     }

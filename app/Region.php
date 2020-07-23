@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class judet extends Model
+class Region extends Model
 {
     public function persoane(){
-        return $this->belongsToMany(person::class);
+        return $this->belongsToMany(person::class, 'people','judetID');
     }
 }

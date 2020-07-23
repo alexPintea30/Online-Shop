@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class author extends Model
+class Author extends Model
 {
     public function books(){
-    return $this->hasMany(book::class,'authorID');
+         return $this->hasMany(book::class,'authorID');
     }
 
     public function persoana(){

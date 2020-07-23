@@ -5,9 +5,11 @@
     <div class="sortari">Aici o sa vina filtrele</div>
     <div class="produse">
     <div class="row">
+
+
     @foreach($carte as $row)
 
-        <div class="col-md-4 product-grid" style="margin: 5px;" >
+        <div class="col-3 product-grid"  >
         <div class="image">
             <a href="#">
                 <img src="{{$row['image']}}"  height="300px"  class="w-100 image">
@@ -23,8 +25,11 @@
         </div>
 
         @endforeach
+        <div style="clear:both; width:100%;"></div>
+        <div  style="clear:both"><ul class="pagination"><li class="page-item">{{$carte->links()}}</li></ul></div>
         </div>
     </div>
     </div>
-    <div style="clear:both"></div>
+
+
 @endsection

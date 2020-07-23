@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\judet;
+use App\category;
 use Illuminate\Http\Request;
 
-class judetController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class judetController extends Controller
      */
     public function index()
     {
-        $judet = judet::all()->toArray();
-        return  view('welcome',compact('judet'));
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class judetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\judet  $judet
+     * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(judet $judet)
+    public function show(category $category)
     {
         //
     }
@@ -53,10 +52,10 @@ class judetController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\judet  $judet
+     * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(judet $judet)
+    public function edit(category $category)
     {
         //
     }
@@ -65,10 +64,10 @@ class judetController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\judet  $judet
+     * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, judet $judet)
+    public function update(Request $request, category $category)
     {
         //
     }
@@ -76,10 +75,10 @@ class judetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\judet  $judet
+     * @param  \App\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(judet $judet)
+    public function destroy(category $category)
     {
         //
     }

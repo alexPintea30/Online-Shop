@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\author;
+use App\Sale;
 use Illuminate\Http\Request;
 
-class authorController extends Controller
+class SaleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class authorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\author  $author
+     * @param  \App\Sale  $vanzari
      * @return \Illuminate\Http\Response
      */
-    public function show(author $author)
+    public function show(Sale $vanzari)
     {
         //
     }
@@ -52,10 +52,10 @@ class authorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\author  $author
+     * @param  \App\Sale  $vanzari
      * @return \Illuminate\Http\Response
      */
-    public function edit(author $author)
+    public function edit(Sale $vanzari)
     {
         //
     }
@@ -64,10 +64,10 @@ class authorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\author  $author
+     * @param  \App\Sale  $vanzari
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, author $author)
+    public function update(Request $request, Sale $vanzari)
     {
         //
     }
@@ -75,10 +75,10 @@ class authorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\author  $author
+     * @param  \App\Sale  $vanzari
      * @return \Illuminate\Http\Response
      */
-    public function destroy(author $author)
+    public function destroy(Sale $vanzari)
     {
         //
     }

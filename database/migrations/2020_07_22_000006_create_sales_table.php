@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVanzarisTable extends Migration
+class CreateSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateVanzarisTable extends Migration
      */
     public function up()
     {
-        Schema::create('vanzaris', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('userID')->unsigned();
-            $table->integer('bookID')->unsigned();
-            $table->foreign('userID')->references('id')->on('users');
-            $table->foreign('bookID')->references('id')->on('books');
+        Schema::create('sales', function (Blueprint $table) {
+            $table->id('id');
+            $table->unsignedBigInteger('userID');
+            $table->unsignedBigInteger('bookID');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('bookID')->references('id')->on('books')->onDelete('cascade');
             $table->integer('cantitate');
             $table->float('pret');
             $table->date('data_vanzarii');
@@ -33,6 +33,6 @@ class CreateVanzarisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vanzaris');
+        Schema::dropIfExists('sales');
     }
 }

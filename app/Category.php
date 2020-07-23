@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class category extends Model
+class Category extends Model
 {
     public function books(){
-        return $this->belongsToMany(book::class);
+        return $this->belongsToMany(book::class, 'books', 'categoryID');
     }
 }

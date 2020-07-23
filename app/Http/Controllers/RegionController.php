@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\vanzari;
+use App\Region;
 use Illuminate\Http\Request;
 
-class vanzariController extends Controller
+class RegionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class vanzariController extends Controller
      */
     public function index()
     {
-        //
+        $judet = Region::all()->toArray();
+        return  view('welcome',compact('judet'));
     }
 
     /**
@@ -41,10 +42,10 @@ class vanzariController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\vanzari  $vanzari
+     * @param  \App\Region  $judet
      * @return \Illuminate\Http\Response
      */
-    public function show(vanzari $vanzari)
+    public function show(Region $judet)
     {
         //
     }
@@ -52,10 +53,10 @@ class vanzariController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\vanzari  $vanzari
+     * @param  \App\Region  $judet
      * @return \Illuminate\Http\Response
      */
-    public function edit(vanzari $vanzari)
+    public function edit(Region $judet)
     {
         //
     }
@@ -64,10 +65,10 @@ class vanzariController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\vanzari  $vanzari
+     * @param  \App\Region  $judet
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, vanzari $vanzari)
+    public function update(Request $request, Region $judet)
     {
         //
     }
@@ -75,10 +76,10 @@ class vanzariController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\vanzari  $vanzari
+     * @param  \App\Region  $judet
      * @return \Illuminate\Http\Response
      */
-    public function destroy(vanzari $vanzari)
+    public function destroy(Region $judet)
     {
         //
     }

@@ -14,12 +14,12 @@ class CreatePeopleTable extends Migration
     public function up()
     {
         Schema::create('people', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->string('nume');
             $table->string('prenume');
             $table->date('data_nasterii');
-            $table->integer('judetID')->unsigned();
-            $table->foreign('judetID')->references('id')->on('judets');
+            $table->unsignedBigInteger('judetID');
+            $table->foreign('judetID')->references('id')->on('regions')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class book extends Model
+class Book extends Model
 {
     public function autorul(){
-return $this->belongsTo(author::class,'authorID');
+    return $this->belongsTo(author::class,'authorID');
     }
 
     public function categorie(){
