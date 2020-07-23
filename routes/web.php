@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get("/testDB", function(){
+    $response = DB::table('multiplier_versions')
+        ->select('')
+        ->join('countries', 'countries.country_id', '=', 'leagues.country_id')
+        ->join('')
+        ->get();
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
