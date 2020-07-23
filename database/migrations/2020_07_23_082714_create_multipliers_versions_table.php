@@ -14,7 +14,7 @@ class CreateMultipliersVersionsTable extends Migration
     public function up()
     {
         Schema::create('multipliers_versions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('multiplier_id');
             $table->unsignedBigInteger('version_id');

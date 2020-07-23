@@ -14,7 +14,7 @@ class CreateMultipliersTable extends Migration
     public function up()
     {
         Schema::create('multipliers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->timestamps();
             $table->string('name');
             $table->string('identifier');

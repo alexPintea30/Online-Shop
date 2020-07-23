@@ -14,7 +14,7 @@ class CreateVersionsTable extends Migration
     public function up()
     {
         Schema::create('versions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->timestamps();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
