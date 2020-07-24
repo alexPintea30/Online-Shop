@@ -1,0 +1,136 @@
+html, body{
+    height:100%;
+}
+body{
+    margin:0;
+    padding: 0;
+    background-image: url("images/blurred-library-bookshelves_23-2148448040.jpg") ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+#navbar{
+
+    top:0;
+    left:0;
+    width:100%;
+    height:105px;
+    border-bottom: 3px solid #202020;
+}
+
+#navbar ul li a {
+    margin:28px 30px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 23px;
+}
+
+#navbar ul li:hover{
+    display:block;
+    border-radius: 25px;
+    background-color: #202020;
+}
+.navbar-collapse{
+    border-radius: 25px;
+    margin:0;
+    padding:0;
+}
+
+footer{
+    border-top:3px solid #202020;
+    margin:0;
+    margin-top:50px;
+    padding:0;
+    padding-left:60px;
+    clear:both;
+}
+
+footer p{
+    color: lightgray;
+    margin:0;
+    padding:0;
+    font-size:18px;
+
+}
+
+.continut{
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+@media only screen and (max-width : 766px) {
+    .navbar-collapse {
+        background: #434444;
+    }
+
+}
+
+
+
+.product-grid{
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background-color: rgba(213, 225, 214, 0.2);
+}
+
+.product-grid:hover{
+    box-shadow: 0 4px 8px 0 black;
+}
+.image{
+    position: relative;
+    border:1px solid black;
+}
+#buy{
+    background-color: transparent;
+    color:#434444;
+    border:1px solid black;
+    margin-top: 10px;
+    width:100%;
+    color:#434444;;
+
+}
+
+#buy:hover{
+    background-color: #333A3A;
+    color:white;
+    border:1px solid white;
+}
+
+.produse{
+box-sizing:border-box;
+    width:95%;
+    float:right;
+    height:100%;
+
+}
+.sortari{
+    width:5%;
+    height:100%;
+    float:left;
+    box-sizing:border-box;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right:0;
+    height: 100%;
+    width:100%;
+    background-color: rgba(67,68,68,0.7);
+    opacity: 0;
+    transition: .4s ease;
+}
+
+.image:hover .overlay{
+    opacity:1;
+}
+.detalii{
+    color: silver;
+    position:absolute;
+    font-size: 15px;
+    top:50%;
+    left:20%;
+
+}
