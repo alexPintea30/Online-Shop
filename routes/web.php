@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get("/testDB", function(){
-    $response = DB::table('multiplier_versions')
-        ->select('')
-        ->join('countries', 'countries.country_id', '=', 'leagues.country_id')
-        ->join('')
-        ->get();
+
 });
 
 Auth::routes();
@@ -32,3 +29,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'cost'], function(){
+    Route::get('/getCost/{basePrice}', function($basePrice){
+       $controller = new CostController;
+       return $controller->cost($basePrice);
+    });
+});
+
+Route::get('/home/{id}', function($id){
+   return "User:".$id;
+});
