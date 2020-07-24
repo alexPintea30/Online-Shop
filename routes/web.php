@@ -14,9 +14,7 @@ use App\Http\Controllers\CostController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'BookController@index');
 
 Route::get("/testDB", function(){
 

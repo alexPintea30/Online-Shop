@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('C:\Users\Meli\PhpstormProjects\practica_2020git\resources\views\layouts\app.blade.php')
 
 @section('content')
 <div class="container">
