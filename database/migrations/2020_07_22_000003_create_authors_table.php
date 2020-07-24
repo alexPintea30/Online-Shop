@@ -16,7 +16,7 @@ class CreateAuthorsTable extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('personID');
-            $table->foreign('personID')->references('id')->on('people')->onDelete('cascade');
+            $table->foreign('personID')->references('id')->on('people')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

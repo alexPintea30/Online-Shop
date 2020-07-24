@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('isAdmin');
             $table->unsignedBigInteger('personID');
-            $table->foreign('personID')->references('id')->on('people')->onDelete('cascade');
+            $table->foreign('personID')->references('id')->on('people')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

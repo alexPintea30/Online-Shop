@@ -19,7 +19,7 @@ class CreatePeopleTable extends Migration
             $table->string('prenume');
             $table->date('data_nasterii');
             $table->unsignedBigInteger('judetID');
-            $table->foreign('judetID')->references('id')->on('regions')->onDelete('cascade');
+            $table->foreign('judetID')->references('id')->on('regions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ class CreateSalesTable extends Migration
             $table->id('id');
             $table->unsignedBigInteger('userID');
             $table->unsignedBigInteger('bookID');
-            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('bookID')->references('id')->on('books')->onDelete('cascade');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('bookID')->references('id')->on('books')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('cantitate');
             $table->float('pret');
             $table->date('data_vanzarii');
