@@ -30,6 +30,7 @@ class Versions extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists("multiplier_versions");
         Schema::dropIfExists("versions");
     }
 }
