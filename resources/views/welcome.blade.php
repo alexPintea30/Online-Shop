@@ -18,7 +18,7 @@
                 <div class="detalii"> Detalii despre carte </div>
             </div>
         </div>
-            <div id="bookinfo">
+            <div id="bookinfo" style="overflow: hidden">
 
         <h5  class="text-center">{{$row['title']}} </h5>
         <h5  class="text-center">{{$row->autorul->persoana['nume']}} {{$row->autorul->persoana['prenume']}}</h5>
