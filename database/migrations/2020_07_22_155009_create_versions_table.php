@@ -18,7 +18,7 @@ class CreateVersionsTable extends Migration
             $table->timestamps();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->text('version_description');
+            $table->text('description');
         });
     }
 
