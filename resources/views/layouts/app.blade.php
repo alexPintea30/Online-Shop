@@ -8,13 +8,13 @@
     <meta name="description" content="Online bookstore">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -29,15 +29,22 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark" >
+<header>
+
+<nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark static-top " >
+    <div class="container-fluid">
+        <div class="navbar-header">
      @if(Auth::check())
         <a href="/home" class="navbar-brand"><img height="90px" src="images/comrawpixel534885.png" alt="nu se poate incarca imaginea" style="padding-left: 30px"></a>
     @else
         <a href="/" class="navbar-brand"><img height="90px" src="images/comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
     @endif
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        </div>
+
+        <button  type="button " class="navbar-toggler " data-toggle="collapse" data-target="#navbarMenu"  >
+            <span class="navbar-toggler-icon ml-auto"></span>
+        </button>
+
     <div class="collapse navbar-collapse" id="navbarMenu" >
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"><a class="nav-link" href="#footersc">Contact</a></li>
@@ -64,7 +71,9 @@
             @endauth
         </ul>
     </div>
+    </div>
 </nav>
+</header>
 
 
 

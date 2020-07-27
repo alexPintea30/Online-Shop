@@ -1,3 +1,5 @@
+
+
 html, body{
     height:100%;
 }
@@ -29,7 +31,7 @@ body{
 #navbar ul li:hover{
     display:block;
     border-radius: 25px;
-    background-color: #202020;
+    background-color: #333A3A;
 }
 .navbar-collapse{
     border-radius: 25px;
@@ -59,34 +61,76 @@ footer p{
     margin-bottom: 50px;
 }
 @media only screen and (max-width : 766px) {
+
     .navbar-collapse {
-        background: #434444;
+        background: #333A3A;
+    }
+
+    #navbarMenu{
+        position:absolute;
+        z-index: 1;
+        width: 100%;
+        top:110px;
+    }
+    #produs{
+        width:300px;
+        margin:auto;
+    }
+
+    #produs h5{
+        font-size: 17px;
+    }
+    #produs h6{
+        font-size: 15px;
+    }
+    .search-box input{
+    width: 50%;
+    margin-left: 20px;
+    }
+}
+@media only screen and (max-width : 900px) {
+
+    #produs h5{
+        font-size: 15px;
+    }
+    #produs h6{
+        font-size: 12px;
     }
 
 }
+@media only screen and (max-width : 1200px) {
 
-
-
-.product-grid{
-    padding-bottom: 20px;
-    padding-top: 20px;
-    background-color: rgba(213, 225, 214, 0.2);
+    #produs h5{
+        font-size: 15px;
+    }
+    #produs h6{
+        font-size: 12px;
+    }
 }
-
-.product-grid:hover{
+    .product-grid{
+    padding-top: 20px;
+    background-color: rgba(224, 219, 219, 0.2);
+}
+    .product-grid:hover{
     box-shadow: 0 4px 8px 0 black;
 }
-.image{
+    .image{
     position: relative;
-    border:1px solid black;
+    border:1px solid #434444;
 }
+
+#bookinfo{
+    height: 25%;
+
+}
+
 #buy{
     background-color: transparent;
     color:#434444;
     border:1px solid black;
-    margin-top: 10px;
+    margin:auto;
     width:100%;
-    color:#434444;;
+    color:#434444;
 
 }
 
@@ -96,7 +140,9 @@ footer p{
     border:1px solid white;
 }
 
-
+#produs{
+    height:500px;
+}
 
 .overlay{
     position: absolute;
@@ -122,3 +168,6 @@ footer p{
     left:20%;
 
 }
+
+
+
