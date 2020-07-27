@@ -29,10 +29,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'cost'], function(){
-    Route::get('/getCost/{basePrice}', function($basePrice){
+    /*
+     * Pentru a primi costul unei carti in functie de judet, varsta si categorie
+     */
+    Route::get('/getCost/{basePrice}/{region}/{age}/{category}', function($basePrice, $region, $age, $category){
        $controller = new CostController;
-       return $controller->cost($basePrice);
+       return $controller->cost($basePrice, $region, $age, $category);
     });
+    Route::get('/version', "VersionController@index");
 });
 
 Route::get('/home/{id}', function($id){

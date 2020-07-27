@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class VersionSeeder extends Seeder
 {
@@ -11,5 +12,26 @@ class VersionSeeder extends Seeder
      */
     public function run(){
         factory(\App\Version::class, 30)->create();
+
+        /*
+         *  Daca vreti sa introduceti date specifice (comentati apelul factory de mai sus)
+         */
+
+        /*
+        DB::table('versions')->insert([
+           [
+               'start_date' => '2020-07-1',
+               'end_date' => '2020-07-30',
+               'description' => 'Summer Sale !!'
+           ],
+
+            [
+                'start_date' => '2020-07-1',
+                'end_date' => '2020-07-30',
+                'description' => 'Summer Sale !!'
+            ]
+        ]);
+        */
+
     }
 }
