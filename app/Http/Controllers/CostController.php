@@ -20,7 +20,7 @@ class CostController extends Controller{
     }
 
     public function cost($basePrice, $region, $age, $category){
-        print_r($this->versionService->getCurrentVersions());
+        // print_r($this->versionService->getCurrentVersions());
         $result = DB::table("multipliers")->get(["multiplier"])->first();
         return response()->json([
             'cost' => $result->multiplier * $basePrice
