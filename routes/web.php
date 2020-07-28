@@ -15,7 +15,6 @@ use App\Http\Controllers\CostController;
 */
 
 Route::get('/', 'BookController@index');
-Route::get('/book/{book}','BookController@show');
 
 Route::get("/testDB", function(){
 
@@ -23,11 +22,11 @@ Route::get("/testDB", function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController.php@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController.php@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'cost'], function(){
     /*
