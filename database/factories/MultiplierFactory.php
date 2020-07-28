@@ -8,8 +8,13 @@ use Faker\Generator as Faker;
 
 function generateCombination($comb){
 
-    $names = ['age', 'region', 'category'];
-    $regions = ['AB', 'SV', 'BV'];
+      // $names = ['age', 'region', 'category'];
+    $regions = ['Alba', 'Arad', 'Arges', 'Bacau', 'Bihor', 'Bistrita-Nasaud',
+        'Botosani', 'Brasov', 'Braila', 'Bucuresti', 'Buzau', 'Caras-Severin', 'Calarasi',
+        'Cluj', 'Constanta', 'Covasna', 'Dambovita', 'Dolj', 'Galati', 'Giurgiu', 'Gorj',
+        'Hunedoara', 'Harghita', 'Ialomita', 'Iasi', 'Ilfov', 'Maramures', 'Mehedinti',
+        'Mures', 'Neamt', 'Olt', 'Prohova', 'Satu Mare', 'Salaj', 'Sibiu', 'Teleorman',
+        'Suceava', 'Timis', 'Tulcea', 'Vaslui', 'Valcea', 'Vrancea'];
     $categories = ['RO', 'OTHER'];
 
     $ret = array();
