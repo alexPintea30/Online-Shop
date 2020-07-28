@@ -7,7 +7,7 @@
     <meta name="kewords"  content="book, books, store, online">
     <meta name="description" content="Online bookstore">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="/style.css" type="text/css">
 
 
     <!-- JS, Popper.js, and jQuery -->
@@ -35,9 +35,9 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 @if(Auth::check())
-                    <a href="/home" class="navbar-brand"><img height="90px" src="images/comrawpixel534885.png" alt="nu se poate incarca imaginea" style="padding-left: 30px"></a>
+                    <a href="/home" class="navbar-brand"><img height="90px" src="/images/comrawpixel534885.png" alt="nu se poate incarca imaginea" style="padding-left: 30px"></a>
                 @else
-                    <a href="/" class="navbar-brand"><img height="90px" src="images/comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
+                    <a href="/" class="navbar-brand"><img height="90px" src="/images/comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
                 @endif
             </div>
 
