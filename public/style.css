@@ -50,6 +50,7 @@ footer p{
     margin:0;
     padding:0;
     font-size:18px;
+    word-wrap: break-word;
 
 }
 
@@ -59,6 +60,9 @@ footer p{
 }
 
 @media only screen and (max-width : 766px) {
+    #navbar ul li {
+        margin-left: 20px;
+    }
 
     .navbar-collapse {
         background: #333A3A;
@@ -67,14 +71,10 @@ footer p{
     #navbarMenu{
         position:absolute;
         z-index: 1;
-        width: 100%;
+        width: 95%;
         top:110px;
     }
 
-    #produs{
-        width:300px;
-        margin:auto;
-    }
 
     #produs h5{
         font-size: 17px;
@@ -87,17 +87,16 @@ footer p{
     width: 50%;
     margin-left: 20px;
     }
-}
-@media only screen and (max-width : 900px) {
-
-    #produs h5{
-        font-size: 15px;
-    }
-    #produs h6{
-        font-size: 12px;
-    }
 
 }
+@media only screen and (max-width : 950px) {
+    #navbar ul li a {
+        margin: 28px 8px;
+
+        font-size: 17px;
+    }
+}
+
 @media only screen and (max-width : 1200px) {
 
     #produs h5{
@@ -144,7 +143,7 @@ footer p{
 }
 
 #produs{
-    height:70vh;
+    height:73vh;
 }
 
 .overlay{
