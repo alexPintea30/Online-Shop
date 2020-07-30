@@ -25,9 +25,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'cost'], function(){
     /*
@@ -39,7 +36,7 @@ Route::group(['prefix' => 'cost'], function(){
     });
     Route::get('/version', "VersionController@index");
     Route::get('/test', function (){
-        return PriceController::getPrice();
+        return PriceController::getPrice(3);
     });
     Route::get('/testCorrect/{basePrice}/{region}/{age}/{category}', function ($basePrice, $region, $age, $category){
         $controller = new CostController();

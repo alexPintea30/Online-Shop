@@ -33,7 +33,6 @@ class CostController extends Controller{
     public function calculateCost($name, $identifier){
         $ret = 1;
         $today = Carbon::today();
-        $multipliers = [];
         if($name == 'age'){
             $result = DB::table('multipliers')
                 ->join('multipliers_versions', 'multipliers_versions.multiplier_id', '=', 'multipliers.id')
@@ -41,11 +40,11 @@ class CostController extends Controller{
                 ->where('multipliers.name', '=', $name)
                 ->whereDate('versions.start_date', '<=', $today)
                 ->whereDate('versions.end_date', '>=', $today)
-                ->select(['multipliers.id', 'name', 'multiplier'])->get();
+                ->select(['multipliers.id', 'name', 'identifier','multiplier'])->get();
 
             $res = json_decode(json_encode($result), true);
-            $multipliers = array_filter($res, function($res) use ($identifier) {
-                    list($age1, $age2) = explode('-', $res);
+            $multipliers = array_filter($res, function($elem) use ($identifier) {
+                    list($age1, $age2) = explode('-', $elem['identifier']);
                     if($identifier >= $age1 && $identifier <= $age2){
                         return true;
                     }
@@ -64,6 +63,7 @@ class CostController extends Controller{
                 ->select(['multipliers.id', 'name', 'multiplier'])->get();
             $multipliers = json_decode(json_encode($result), true);
         }
+
         foreach($multipliers as $m){
             $ret = $ret * $m['multiplier'];
         }
