@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +16,37 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'BookController@index');
 
-Auth::routes();
+Route::get("/testDB", function(){
 
-Route::get('/home', 'HomeController.php@index')->name('home');
+});
 
-Auth::routes();
-
-Route::get('/report', 'DownloadReportsController@report');
+Route::get('/book/{bookID}','BookController@show');
 
 Auth::routes();
 
-Route::get('/download', 'DownloadReportsController@download');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'cost'], function(){
+    /*
+     * Pentru a primi costul unei carti in functie de judet, varsta si categorie
+     */
+    Route::get('/getCost/{basePrice}/{region}/{age}/{category}', function($basePrice, $region, $age, $category){
+       $controller = new CostController;
+       return $controller->cost($basePrice, $region, $age, $category);
+    });
+    Route::get('/version', "VersionController@index");
+});
+
+Route::get('/home/{id}', function($id){
+   return "User:".$id;
+});
+
+Auth::routes();
+
+Route::get('/register', 'RegionController@index')->name('register');
+
+

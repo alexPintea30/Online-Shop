@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMultipliersTable extends Migration
+class Multipliers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ class CreateMultipliersTable extends Migration
     public function up()
     {
         Schema::create('multipliers', function (Blueprint $table) {
-            $table->id();
+            $table->id("id");
+            $table->string("name");
+            $table->string("identifier");
+            $table->float("multiplier");
             $table->timestamps();
-            $table->string('name');
-            $table->string('identifier');
-            $table->float('multiplier');
+
         });
     }
 
@@ -29,6 +30,7 @@ class CreateMultipliersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('multipliers');
+        Schema::dropIfExists("multiplier_versions");
+        Schema::dropIfExists("multipliers");
     }
 }
