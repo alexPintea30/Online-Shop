@@ -22,11 +22,18 @@ Route::get("/testDB", function(){
 });
 
 Route::get('/book/{bookID}','BookController@show');
+Route::get('/submit','SaleController@store');
+Route::get( '/succes',function(){
+return view('succes');
+});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController.php@index')->name('home');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController.php@index')->name('home');
 
 Route::group(['prefix' => 'cost'], function(){
     /*

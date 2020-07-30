@@ -21,7 +21,7 @@
             <br>
              @if($book->stoc>0)
                  @if(Auth::check())
-            <form action="SaleController@store" >
+            <form action="{{url('/submit')}}" >
                 <label for="cantitate" style="font-size:20px"> Cantitate: </label>
                 <input type="number" name="cantitate" min="1" class="form-control" style="display:inline-block; width:75px; height:35px">
                 <input type="hidden" name="user" value="{{Auth::id()}}">
