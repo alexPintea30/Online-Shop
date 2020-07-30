@@ -48,3 +48,9 @@ Route::group(['prefix' => 'cost'], function(){
 Route::get('/home/{id}', function($id){
    return "User:".$id;
 });
+
+Auth::routes();
+
+Route::get('/register', 'RegionController@index')->name('register');
+
+

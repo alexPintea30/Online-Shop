@@ -1,6 +1,9 @@
 <?php
-
+namespace App\Http\Controllers;
 namespace App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\User;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -37,4 +40,29 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    function index()
+    {
+        return view('auth/login');
+    }
+
+    function login(Request $request){
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password'  => 'required'
+        ]);
+
+        $user_data =[
+            'email'  => $request['email'],
+            'password' => $request['password']
+        ];
+        if(Auth::attempt($user_data))
+        {
+            return redirect('/');
+        }
+        else
+        {
+            return back()->with('error', 'Incorrect email or password');
+        }
+    }
+
 }
