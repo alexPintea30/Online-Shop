@@ -20,6 +20,8 @@ Route::get("/testDB", function(){
 
 });
 
+Route::get('/book/{bookID}','BookController@show');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
