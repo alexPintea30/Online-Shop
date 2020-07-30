@@ -25,9 +25,7 @@
         <h5  class="text-center">{{$row->autorul->persoana['nume']}} {{$row->autorul->persoana['prenume']}}</h5>
                 @auth
         <h6  class="text-center">Pret: {{
-                $controller = new \App\Http\Controllers\CostController(),
-                $controller->
-                //\App\Http\Controllers\PriceController::getPrice($row['base_price'])['cost']}} lei</h6>
+                \App\Http\Controllers\PriceController::getPrice($row['base_price'])['cost']}} lei</h6>
                 @endauth
                     <h6  class="text-center">Pret: {{$row['base_price']}} lei</h6>
 
