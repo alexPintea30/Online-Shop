@@ -17,8 +17,12 @@ Route::get('/', 'BookController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController.php@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/report', 'DownloadReportsController@report');
+
+Auth::routes();
+
+Route::get('/download', 'DownloadReportsController@download');
