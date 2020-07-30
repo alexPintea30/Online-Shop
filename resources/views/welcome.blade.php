@@ -6,7 +6,7 @@
     <div class="produse">
     <div class="row" >
 
-
+        <a href="http://localhost:8000/cost/getCost/1/a/b/c">Press!!!</a>
     @foreach($carte as $row)
 
         <div id="produs" class="col-md-3 product-grid"  >
@@ -22,7 +22,9 @@
 
         <h5  class="text-center">{{$row['title']}} </h5>
         <h5  class="text-center">{{$row->autorul->persoana['nume']}} {{$row->autorul->persoana['prenume']}}</h5>
-        <h6  class="text-center">Pret: {{$row['base_price']}} lei</h6>
+        <h6  class="text-center">Pret: {{
+                \App\Http\Controllers\PriceController::getPrice($row['base_price'])["cost"]
+                }} lei</h6>
             </div>
 
             <div >

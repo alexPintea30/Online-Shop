@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CostController;
 
@@ -37,6 +38,13 @@ Route::group(['prefix' => 'cost'], function(){
        return $controller->cost($basePrice, $region, $age, $category);
     });
     Route::get('/version', "VersionController@index");
+    Route::get('/test', function (){
+        return PriceController::getPrice();
+    });
+    Route::get('/testCorrect/{basePrice}/{region}/{age}/{category}', function ($basePrice, $region, $age, $category){
+        $controller = new CostController();
+        return $controller->finalPrice($basePrice, $region, $age, $category);
+    });
 });
 
 Route::get('/home/{id}', function($id){
