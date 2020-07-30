@@ -7,6 +7,14 @@
             <div class="card" style="margin:53px 0;">
                 <div class="card-header">{{ __('Login') }}</div>
 
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" >
                         @csrf
@@ -63,6 +71,9 @@
                                     </a>
                                 @endif
                             </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <a href="/register">I don't have an account</a>
                         </div>
                     </form>
                 </div>
