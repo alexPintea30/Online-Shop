@@ -24,7 +24,7 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -33,9 +33,15 @@ class SaleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $userID= Input::get('user');
+        $bookID=  Input::get('book');
+        $cantitate=  Input::get('cantitate');
+        $pret=  Input::get('price');
+        $data_vanzarii= Carbon\Carbon::now();
+        $sale = ['userID'=>$userID,'bookID'=>$bookID,'cantitate'=>$cantitate,'pret'=>$pret,'data_vanzarii'=>$data_vanzarii];
+        DB::table('sales')->insert($sale);
     }
 
     /**

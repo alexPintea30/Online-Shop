@@ -12,10 +12,11 @@ class RegionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //functia index returneaza din db toate judetele pt a le folosi la inregistrarea userului
     public function index()
     {
-        $judet = Region::all()->toArray();
-        return  view('welcome',compact('judet'));
+        $regionList = Region::select('id','name')->get();
+        return  view('auth/register',compact('regionList'));
     }
 
     /**

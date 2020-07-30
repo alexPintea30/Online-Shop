@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="thor.softexco.ro" id="2d22af43-31bb-4554-b9c2-1039ac51ffe5" port="5436" nameFormat="DESCRIPTIVE" username="practica_2020" />
+    </configs>
+  </component>
+</project>
