@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Sale;
 use Illuminate\Http\Request;
 
@@ -33,15 +33,17 @@ class SaleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {
-        $userID= Input::get('user');
-        $bookID=  Input::get('book');
-        $cantitate=  Input::get('cantitate');
-        $pret=  Input::get('price');
-        $data_vanzarii= Carbon\Carbon::now();
-        $sale = ['userID'=>$userID,'bookID'=>$bookID,'cantitate'=>$cantitate,'pret'=>$pret,'data_vanzarii'=>$data_vanzarii];
-        DB::table('sales')->insert($sale);
+    public function store(Request $req)
+    {   print_r($req->input());
+        $sale= new Sale;
+        $sale->userID=$req->user;
+        $sale->bookID = $req->book;
+        $sale->cantitate = $req->cantitate;
+        $sale->pret = $req->price;
+        $sale->data_vanzarii = Carbon::now();
+        $sale->save();
+        return redirect('/succes');
+
     }
 
     /**
