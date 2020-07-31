@@ -1,11 +1,13 @@
+@extends('layouts.app')
 
-<?php
-?>
-<form action="Report1.php" method="POST" id="btn1">
-    <p>Alegeti judetul si perioada pentru care doriti raportul<br>
+@section('content')
+<div class="continut">
+
+<form action="Report1.php" method="POST" >
+    <p id="titlu_rapoarte">Alegeti judetul si perioada pentru care doriti rapoartele<br>
         <br>
         <br>
-        <select name="judetul_ales">
+        <select name="judetul_ales" class="lista_rapoarte">
             <option value="Alba">Alba</option>
             <option value="Arad">Arad</option>
             <option value="Arges">Arges</option>
@@ -54,7 +56,7 @@
         </select>
         <br>
         <br>
-        <select name="datapicker" id="datapicker">
+        <select name="datapicker" id="datapicker" class="lista_rapoarte" >
             <option value="Astazi">Astazi</option>
             <option value="In ultima saptamana">In ultima saptamana</option>
             <option value="In ultima luna">In ultima luna</option>
@@ -64,24 +66,26 @@
         </select>
         <br>
         <br>
-        <input type="submit" id="btn1" name="submit_btn" value="Exportati Rapoartele" ;>
+
+        <input type="submit" id="btn1" value="Descarca Rapoarte" onclick="Trimite_formulare()">
+        <input type="submit" id="btn2" formaction="Report2.php" hidden="hidden" value="Submit R2" >
+        <input type="submit" id="btn3" formaction="Report3.php" hidden="hidden" value="Submit R3">
+
+
 </form>
 
-<form action="Report2.php" method="POST">
-    <input type="submit" id="btn2" name="submit_btn" value=""style="display: none;";>
-</form>
-
-<form action="Report3.php" method="POST">
-    <input type="submit" id="btn3" name="submit_btn" value="" ;>
-</form>
-
-<button type="button" id="btnnn">Click Me!</button>
 
 
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
 
-    $('p').click(function(){
-alert("The paragraph was clicked.");
-});
+    function Trimite_formulare()
+    {
+        setTimeout(function(){ $("#btn2").click();}, 3000);
+        setTimeout(function(){ $("#btn3").click();}, 6000);
+    }
 
 </script>
+</div>
+
+@stop

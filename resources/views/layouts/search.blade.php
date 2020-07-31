@@ -65,7 +65,7 @@
                     @auth
 
                         @if(Auth::user()->isAdmin==1)
-                            <li class="nav-item"><a class="nav-link" href="#">Rapoarte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/reports">Rapoarte</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Clienti</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Adauga carte</a></li>
                         @endif
