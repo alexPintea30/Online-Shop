@@ -2,12 +2,46 @@
 
 @section('content')
     <div class="container">
-    <div class="sortari">Aici o sa vina filtrele</div>
+    <div class="sortari">
+        @Auth    <form action="/authFilter">
+        Sortati dupa:<select name="select" onChange="window.location.href=this.value">
+            <option value="/">Alege o optiune</option>
+            <option  value="/?titlu=crescator" <?php echo (isset($_GET['titlu']) && $_GET['titlu'] == 'crescator') ? ' selected="selected"' : '' ; ?>>Titlu crescator</option>
+            <option  value="/?titlu=descrescator"<?php echo (isset($_GET['titlu']) && $_GET['titlu'] == 'descrescator') ? ' selected="selected"' : '' ; ?>>Titlu descrescator</option>
+            <option  value="/?autor=crescator" <?php echo (isset($_GET['autor']) && $_GET['autor'] == 'crescator') ? ' selected="selected"' : '' ; ?>>Autor crescator</option>
+            <option  value="/?autor=descrescator" <?php echo (isset($_GET['autor']) && $_GET['autor'] == 'descrescator') ? ' selected="selected"' : '' ; ?>>Autor descrescator</option>
+        </select>
+
+            Interval pret:
+            <label for="minvalue">Min</label><input type="text" name="minvalue">
+            <label for="maxvalue">Max</label><input type="text" name="maxvalue">
+            <button type="submit">Filtreaza</button>
+        </form>
+        @endauth
+        @guest
+                <form action="/guestFilter">
+                    Sortati dupa:<select name="select" onChange="window.location.href=this.value">
+                        <option value="/">Alege o optiune</option>
+                        <option  value="/?titlu=crescator" <?php echo (isset($_GET['titlu']) && $_GET['titlu'] == 'crescator') ? ' selected="selected"' : '' ; ?>>Titlu crescator</option>
+                        <option  value="/?titlu=descrescator"<?php echo (isset($_GET['titlu']) && $_GET['titlu'] == 'descrescator') ? ' selected="selected"' : '' ; ?>>Titlu descrescator</option>
+                        <option  value="/?autor=crescator" <?php echo (isset($_GET['autor']) && $_GET['autor'] == 'crescator') ? ' selected="selected"' : '' ; ?>>Autor crescator</option>
+                        <option  value="/?autor=descrescator" <?php echo (isset($_GET['autor']) && $_GET['autor'] == 'descrescator') ? ' selected="selected"' : '' ; ?>>Autor descrescator</option>
+                    </select>
+
+                    Interval pret:
+                    <label for="minvalue">Min</label><input type="text" name="minvalue">
+                    <label for="maxvalue">Max</label><input type="text" name="maxvalue">
+                    <button type="submit">Filtreaza</button>
+                </form>
+        @endguest
+    </div>
     <div class="produse">
     <div class="row" >
 
 
     @foreach($carte as $row)
+
+
 
         <div id="produs" class="col-md-3 col-sm-4 col-6 product-grid"  >
             <a href="/book/{{$row['id']}}">
@@ -31,6 +65,7 @@
             <a href="/book/{{$row['id']}}" class="btn text-center" id="buy" >Cumpara</a>
         </div>
         </div>
+
         @endforeach
     </div>
         <div style="clear:both; width:100%;"></div>
