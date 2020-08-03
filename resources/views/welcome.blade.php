@@ -6,7 +6,7 @@
     <div class="produse">
     <div class="row" >
 
-
+        @php($controller = new \App\Http\Controllers\PriceController())
     @foreach($carte as $row)
 
         <div id="produs" class="col-md-3 col-sm-4 col-6 product-grid"  >
@@ -24,7 +24,21 @@
 
         <h5  class="text-center">{{$row['title']}} </h5>
         <h5  class="text-center">{{$row->autorul->persoana['nume']}} {{$row->autorul->persoana['prenume']}}</h5>
-        <h6  class="text-center">Pret: {{$row['base_price']}} lei</h6>
+                @auth
+                    <h5 class = "text-center">Pret ?:
+                        {{
+                             round($controller->getFinalPrice(
+                                 $row['base_price'],
+                                 $region[0]["name"],
+                                 Carbon\Carbon::now()->diffInYears($person[0]['data_nasterii']),
+                                 ($row->categorie['name'] == "straina") ? "OTHER" : "RO"
+                             ),2)
+
+                             }}
+                  </h5>
+                @endauth
+                    <h6  class="text-center">Pret: {{$row['base_price']}} lei</h6>
+
             </div>
 
             <div>

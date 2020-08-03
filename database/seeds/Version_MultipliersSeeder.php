@@ -36,5 +36,14 @@ class Version_MultipliersSeeder extends Seeder{
                 ]
             ]);
         }
+
+/*
+        DB::table('multipliers_versions')->insert([
+            [
+                'multiplier_id' => 13,
+                'version_id' => 31
+            ]
+        ]);
+*/
     }
 }
