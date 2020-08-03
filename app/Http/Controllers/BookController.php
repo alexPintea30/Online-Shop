@@ -22,7 +22,26 @@ class BookController extends Controller
     public function index()
     {
         $carte= book::latest()->paginate(12);
-        return view('welcome',compact('carte'));
+        if(Auth::user()){
+            $personID = Auth::user()->personID;
+            $person = Person::where('id', '=', $personID)->get();
+            $region = Region::where('id', '=', $person[0]['judetID'])->get();
+        }
+        /*
+        $authors = [];
+        foreach($carte as $c){
+            $authorID = $c['authorID'];
+            $authorPersonID = Author::where('id', '=', $authorID)->get(['personID']);
+            $authors[$c['id']] = Person::where('id', '=', $authorPersonID)->get('judetID');
+        }
+        */
+        //dd($region["0"]["name"]);
+
+        return view('welcome',[
+            'carte' => $carte,
+            'person' => $person ?? "emptyPerson",
+            'region' => $region ?? "emptyRegion"
+        ]);
     }
 
     /**
@@ -120,8 +139,28 @@ class BookController extends Controller
         }
 
 
+        if(Auth::user()){
+            $personID = Auth::user()->personID;
+            $person = Person::where('id', '=', $personID)->get();
+            $region = Region::where('id', '=', $person[0]['judetID'])->get();
+        }
+        /*
+        $authors = [];
+        foreach($carte as $c){
+            $authorID = $c['authorID'];
+            $authorPersonID = Author::where('id', '=', $authorID)->get(['personID']);
+            $authors[$c['id']] = Person::where('id', '=', $authorPersonID)->get('judetID');
+        }
+        */
+        //dd($region["0"]["name"]);
 
-        return view ('welcome',compact('carte'));
+        return view('welcome',[
+            'carte' => $carte,
+            'person' => $person ?? "emptyPerson",
+            'region' => $region ?? "emptyRegion"
+        ]);
+
+       // return view ('welcome',compact('carte'));
 
 }
 }
