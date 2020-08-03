@@ -25,9 +25,9 @@ class CostController extends Controller{
     }
 
     public function finalPrice($basePrice, $region, $age, $category){
-        return $basePrice * $this->calculateCost('region', $region) *
-            $this->calculateCost('age', $age) *
-            $this->calculateCost('category', $category);
+        return $basePrice * $this->calculateCost('region', $region)
+          * $this->calculateCost('age', $age)
+         * $this->calculateCost('category', $category);
     }
 
     public function calculateCost($name, $identifier){
@@ -50,7 +50,10 @@ class CostController extends Controller{
                     }
                     return false;
             });
-
+            foreach($multipliers as $m){
+                $ret = $ret * $m['multiplier'];
+            }
+            return $ret;
         }else {
 
             $result = DB::table('multipliers')

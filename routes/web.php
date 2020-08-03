@@ -44,6 +44,10 @@ Route::group(['prefix' => 'cost'], function(){
         $controller = new CostController();
         return $controller->finalPrice($basePrice, $region, $age, $category);
     });
+    Route::get('/getFinalPrice/{basePrice}/{region}/{age}/{category}', function ($basePrice, $region, $age, $category){
+       $controller = new CostController();
+       return $controller->finalPrice($basePrice, $region, $age, $category);
+    });
 });
 
 Route::get('/home/{id}', function($id){

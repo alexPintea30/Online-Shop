@@ -23,4 +23,23 @@ class PriceController extends Controller{
 
         return "test";
     }
+
+    public function getFinalPrice($basePrice, $region, $age, $category){
+        try{
+            $client = new Client([
+                'base_uri' => 'http://localhost:8000',
+                'defaults' => [
+                    'exceptions' => false
+                ]
+            ]);
+            //dd('/cost/getFinalPrice/' .$basePrice. '/'.$region.'/30/'.$category);
+            $res = $client->get('/cost/getFinalPrice/' .$basePrice. '/'.$region.'/'.$age.'/'.$category);
+
+            return json_decode($res->getBody(), true);
+        }catch (GuzzleException $e){
+
+        }
+        return "test";
+    }
+
 }
