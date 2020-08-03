@@ -1,86 +1,80 @@
-@extends('layouts.app')
+@extends('layouts.app') <!-- aplic designul general al site-ului asupra pagini -->
 
-@section('content')
+@section('content') <!-- aplic subdesignul de tip content al designului de mai sus -->
+
 <div class="continut">
+<!--form-ul care va culege datele; folosesc POST pentru a nu fi probleme cu length restrictions, eventual sensitive data.-->
+<form action="Cele_Mai_Multe_Carti_Vandute_Pe_Judet.php" method="POST" >
+<!-- dupa selectarea datelor, acestea vor fi preluate si folosite in paginire de form-uri,
+ gen Cele_Mai_Multe_Carti_Vandute_Pe_Judet.php -->
 
-<form action="Report1.php" method="POST" >
     <p id="titlu_rapoarte">Alegeti judetul si perioada pentru care doriti rapoartele<br>
         <br>
         <br>
-        <select name="judetul_ales" class="lista_rapoarte">
-            <option value="Alba">Alba</option>
-            <option value="Arad">Arad</option>
-            <option value="Arges">Arges</option>
-            <option value="Bacau">Bacau</option>
-            <option value="Bihor">Bihor</option>
-            <option value="Bistrita-Nasaud">Bistrita-Nasaud</option>
-            <option value="Botosani">Botosani</option>
-            <option value="Brasov">Brasov</option>
-            <option value="Braila">Braila</option>
-            <option value="Bucuresti"> Bucuresti</option>
-            <option value="Buzau">Buzau</option>
-            <option value="Caras-Severin">Caras-Severin</option>
-            <option value="Calarasi">Calarasi</option>
-            <option value="Cluj">Cluj</option>
-            <option value="Constanta">Constanta</option>
-            <option value="Covasna">Covasna </option>
-            <option value="Dambovita">Dambovita</option>
-            <option value="Dolj">Dolj</option>
-            <option value="Galati">Galati</option>
-            <option value="Giurgiu">Giurgiu</option>
-            <option value="Gorj">Gorj</option>
-            <option value="Hunedoara">Hunedoara </option>
-            <option value="Harghita">Harghita</option>
-            <option value="Ialomita">Ialomita</option>
-            <option value="Iasi">Iasi </option>
-            <option value="Ilfov">Ilfov</option>
-            <option value="Maramures">Maramures</option>
-            <option value="Mehedinti">Mehedinti </option>
-            <option value="Mures">Mures</option>
-            <option value="Neamt">Neamt</option>
-            <option value="Olt">Olt </option>
-            <option value="Prahova">Prahova</option>
-            <option value="Satu Mare">Satu Mare</option>
-            <option value="Salaj">Salaj</option>
-            <option value="Sibiu">Sibiu</option>
-            <option value="Teleorman">Teleorman</option>
-            <option value="Suceava">Suceava</option>
-            <option value="Timis">Timis </option>
-            <option value="Tulcea">Tulcea</option>
-            <option value="Vaslui">Vaslui</option>
-            <option value="Valcea">Valcea</option>
-            <option value="Vrancea">Vrancea</option>
-            <option value="Other">Other</option>
-            <option value="RO">Romaneasca</option>
+ <?php
+        //Ne conectam la BD folosind extensia PDO.
+        $pdo = new PDO('mysql:host=localhost; dbname=laravel', 'root', '');
+
+        //setam statement-ul corespunzator datelor pe care le dorim, din tabela corespunzatore.
+        $sql = "SELECT name FROM regions";
+
+        //Pregatim select statement-ul de mai sus pentru rulare
+        $stmt = $pdo->prepare($sql);
+
+        //Executam statement-ul
+        $stmt->execute();
+
+        //Receptionam datele din BD prin metoda fetchAll.
+        $regions = $stmt->fetchAll();
+
+        ?>
+    <!-- select-ul corespunzator regiunilor pentru care se vor calcula rapoartele -->
+        <select name="judetul_ales" label="judetul_ales" class="lista_rapoarte">
+
+            <?php foreach($regions as $region): ?>
+     <!-- luam datele care ne intereseaza rand pe rand din BD si le implementam ca drop-list.-->
+            <option value="<?= $region['name']; ?>"><?= $region['name']; ?></option>
+            <?php endforeach; ?>
 
         </select>
+
         <br>
         <br>
+    <!-- select-ul corespunzator perioadelor de timp pentru care se vor calcula rapoartele -->
         <select name="datapicker" id="datapicker" class="lista_rapoarte" >
+
             <option value="Astazi">Astazi</option>
             <option value="In ultima saptamana">In ultima saptamana</option>
             <option value="In ultima luna">In ultima luna</option>
             <option value="In ultimele 6 luni">In ultimele 6 luni</option>
             <option value="In ultimul an">In ultimul an</option>
             <option value="Din toate timpurile">Din toate timpurile</option>
+
         </select>
         <br>
         <br>
 
+    <!-- butonul de download principal, vizibil, care la click apeleaza functia "Trimite_formulare"-->
         <input type="submit" id="btn1" value="Descarca Rapoarte" onclick="Trimite_formulare()">
-        <input type="submit" id="btn2" formaction="Report2.php" hidden="hidden" value="Submit R2" >
-        <input type="submit" id="btn3" formaction="Report3.php" hidden="hidden" value="Submit R3">
+
+   <!-- butonul de download pentru al doilea raport, nu e vizibil, urmeaza a fi actionat in functia "Trimite_formulare" -->
+        <input type="submit" id="btn2" formaction="Top_Cumparatori_Volum-Cantitate.php" hidden="hidden" value="Submit R2" >
+
+    <!--butonul de download pentru al treilea raport, nu e vizibil, urmeaza a fi actionat in functia "Trimite_formulare" -->
+        <input type="submit" id="btn3" formaction="Cei_Mai_Bine_Vanduti_Autori-Volum.php" hidden="hidden" value="Submit R3">
 
 
 </form>
 
 
-
+<!--referinta la libraria de jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
 
+<script>
+ //Functia care va actiona un click pe butoanele 2 & 3, actionata de un click pe butonul 1.
     function Trimite_formulare()
     {
+        //folosesc timeout pentru a nu bloca procesul de download; trebuie sa existe un delay intre ele.
         setTimeout(function(){ $("#btn2").click();}, 3000);
         setTimeout(function(){ $("#btn3").click();}, 6000);
     }
@@ -89,3 +83,4 @@
 </div>
 
 @stop
+<!-- inchid template-ul de design. -->
