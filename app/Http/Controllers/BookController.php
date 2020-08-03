@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Author;
+use Illuminate\Support\Facades\DB;
 use App\book;
 use App\Region;
 use Illuminate\Http\Request;
@@ -21,26 +22,7 @@ class BookController extends Controller
     public function index()
     {
         $carte= book::latest()->paginate(12);
-        if(Auth::user()){
-            $personID = Auth::user()->personID;
-            $person = Person::where('id', '=', $personID)->get();
-            $region = Region::where('id', '=', $person[0]['judetID'])->get();
-        }
-        /*
-        $authors = [];
-        foreach($carte as $c){
-            $authorID = $c['authorID'];
-            $authorPersonID = Author::where('id', '=', $authorID)->get(['personID']);
-            $authors[$c['id']] = Person::where('id', '=', $authorPersonID)->get('judetID');
-        }
-        */
-        //dd($region["0"]["name"]);
-
-        return view('welcome',[
-            'carte' => $carte,
-            'person' => $person ?? "dasda",
-            'region' => $region ?? "asdasd"
-        ]);
+        return view('welcome',compact('carte'));
     }
 
     /**
@@ -109,4 +91,37 @@ class BookController extends Controller
     {
         //
     }
+
+    public function search(Request $request){
+
+        $string = $request->searchstr;
+        $s = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);
+        $carte = collect([]);
+
+        foreach($s as $str)
+
+        {
+            $carte = Book::where('title', 'LIKE', '%' .$str. '%')
+                ->orwhereIN('authorID', function ($query) use ($str) {
+                    $query->select('id')
+                        ->from('authors')
+                        ->whereIn('personID', function ($query2) use ($str) {
+                            $query2->select('id')
+                                ->from('people')
+                                ->where('nume', 'LIKE', '%' .$str. '%')
+                                ->orwhere('prenume', 'LIKE', '%' .$str. '%')
+                                ->orwherein('judetID', function ($query3) use ($str) {
+                                    $query3->select('id')
+                                        ->from('regions')
+                                        ->where('name', 'LIKE', '%' .$str. '%');
+                                });
+                        });
+                })->paginate(12);
+        }
+
+
+
+        return view ('welcome',compact('carte'));
+
+}
 }
