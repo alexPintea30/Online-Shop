@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+
 
 class BookController extends Controller
 {
@@ -85,4 +86,37 @@ class BookController extends Controller
     {
         //
     }
+
+    public function search(Request $request){
+
+        $string = $request->searchstr;
+        $s = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);
+        $carte = collect([]);
+
+        foreach($s as $str)
+
+        {
+            $carte = Book::where('title', 'LIKE', '%' .$str. '%')
+                ->orwhereIN('authorID', function ($query) use ($str) {
+                    $query->select('id')
+                        ->from('authors')
+                        ->whereIn('personID', function ($query2) use ($str) {
+                            $query2->select('id')
+                                ->from('people')
+                                ->where('nume', 'LIKE', '%' .$str. '%')
+                                ->orwhere('prenume', 'LIKE', '%' .$str. '%')
+                                ->orwherein('judetID', function ($query3) use ($str) {
+                                    $query3->select('id')
+                                        ->from('regions')
+                                        ->where('name', 'LIKE', '%' .$str. '%');
+                                });
+                        });
+                })->paginate(12);
+        }
+        
+
+
+        return view ('welcome',compact('carte'));
+
+}
 }

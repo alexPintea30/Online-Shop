@@ -26,6 +26,9 @@ Route::get( '/succes',function(){
 return view('succes');
 });
 
+Route::get('/cautare', 'BookController@search')->name('cautare');;
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController.php@index')->name('home');

@@ -39,7 +39,7 @@ class SaleController extends Controller
         $sale->userID=$req->user;
         $sale->bookID = $req->book;
         $sale->cantitate = $req->cantitate;
-        $sale->pret = $req->price;
+        $sale->pret = ($req->price * $req->cantitate);
         $sale->data_vanzarii = Carbon::now();
         $sale->save();
         return redirect('/succes');

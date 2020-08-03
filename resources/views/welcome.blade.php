@@ -23,7 +23,7 @@
             <div id="bookinfo">
 
         <h5  class="text-center">{{$row['title']}} </h5>
-        <h5  class="text-center">{{$row->autorul->persoana['nume']}} {{$row->autorul->persoana['prenume']}}</h5>
+        <h5  class="text-center">{{$row->autorul->persoana['prenume']}} {{$row->autorul->persoana['nume']}} </h5>
         <h6  class="text-center">Pret: {{$row['base_price']}} lei</h6>
             </div>
 
@@ -32,10 +32,14 @@
         </div>
         </div>
         @endforeach
-        <div style="clear:both; width:100%;"></div>
-        <div  style="margin-top:25px; margin-left: auto;margin-right: auto">  {{$carte->links('vendor/pagination/bootstrap-4')}}
-            </div>
     </div>
+        <div style="clear:both; width:100%;"></div>
+        <div   style="margin-top: 50px;" > {{$carte->appends(request()->input())->links('vendor/pagination/bootstrap-4')}}
+        </div>
+
+
+
+
     </div>
     </div>
 
