@@ -6,16 +6,15 @@ use Illuminate\Http\Request;
 
 class DownloadReportsController extends Controller
 {
-    public function download()
-    {
-        return view('download');
-    }
 
-    public function report()
+    public function reports()
     {
         return view ('report');
     }
-
+    public function test()
+    {
+        return view ('test');
+    }
 
 }
 

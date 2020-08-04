@@ -38,6 +38,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController.php@index')->name('home');
 
+
 Route::group(['prefix' => 'cost'], function(){
     /*
      * Pentru a primi costul unei carti in functie de judet, varsta si categorie
@@ -69,3 +70,12 @@ Auth::routes();
 Route::get('/register', 'RegionController@index')->name('register');
 
 
+Auth::routes();
+
+Route::get('/reports', 'DownloadReportsController@reports')->name('reports');
+
+
+
+Auth::routes();
+
+Route::get('/test', 'DownloadReportsController@test')->name('test');

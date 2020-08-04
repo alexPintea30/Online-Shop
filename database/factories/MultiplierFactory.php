@@ -13,7 +13,7 @@ function generateCombination($comb){
         'Botosani', 'Brasov', 'Braila', 'Bucuresti', 'Buzau', 'Caras-Severin', 'Calarasi',
         'Cluj', 'Constanta', 'Covasna', 'Dambovita', 'Dolj', 'Galati', 'Giurgiu', 'Gorj',
         'Hunedoara', 'Harghita', 'Ialomita', 'Iasi', 'Ilfov', 'Maramures', 'Mehedinti',
-        'Mures', 'Neamt', 'Olt', 'Prohova', 'Satu Mare', 'Salaj', 'Sibiu', 'Teleorman',
+        'Mures', 'Neamt', 'Olt', 'Prahova', 'Satu Mare', 'Salaj', 'Sibiu', 'Teleorman',
         'Suceava', 'Timis', 'Tulcea', 'Vaslui', 'Valcea', 'Vrancea'];
     $categories = ['RO', 'OTHER'];
 

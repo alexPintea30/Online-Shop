@@ -179,3 +179,32 @@ footer p{
     transform: scale(1.08);
     box-shadow: 0 6px 10px 0 black;
 }
+
+div.a {
+    text-align: center;
+}
+
+#rapoarte{
+    position:absolute;
+    font-size: 25px;
+    top:50%;
+    left:40%;
+}
+#titlu_rapoarte{
+    font-size: 25px;
+    top:50%;
+    text-align: center;
+    font-family: Tahoma, Geneva, sans-serif;
+    word-wrap: break-word;
+}
+#btn1{
+    padding:10px;
+    border-radius:15px;
+    background-color: #555555;
+
+}
+.lista_rapoarte{
+    padding:7px;
+    border-radius:12px;
+    width: 200px;
+}
