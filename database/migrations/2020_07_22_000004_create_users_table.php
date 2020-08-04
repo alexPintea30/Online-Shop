@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('isAdmin');
+            $table->boolean('isApproved')->default(0);
             $table->unsignedBigInteger('personID');
             $table->foreign('personID')->references('id')->on('people')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();

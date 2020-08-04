@@ -54,9 +54,10 @@
             @auth
 
                 @if(Auth::user()->isAdmin==1)
-                    <li class="nav-item"><a class="nav-link" href="#">Rapoarte</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/reports">Rapoarte</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Clienti</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Adauga carte</a></li>
+
                 @endif
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-circle-o" style="font-size:25px"></i>Contul meu</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();

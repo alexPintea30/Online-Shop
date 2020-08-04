@@ -78,6 +78,8 @@ Route::get('/home', 'HomeController.php@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController.php@index')->name('home');
+Route::get('/home', 'HomeController.php@index')->name('home');
+
 
 Route::group(['prefix' => 'cost'], function(){
     /*
@@ -88,6 +90,17 @@ Route::group(['prefix' => 'cost'], function(){
        return $controller->cost($basePrice, $region, $age, $category);
     });
     Route::get('/version', "VersionController@index");
+    Route::get('/test', function (){
+        return PriceController::getPrice(3);
+    });
+    Route::get('/testCorrect/{basePrice}/{region}/{age}/{category}', function ($basePrice, $region, $age, $category){
+        $controller = new CostController();
+        return $controller->finalPrice($basePrice, $region, $age, $category);
+    });
+    Route::get('/getFinalPrice/{basePrice}/{region}/{age}/{category}', function ($basePrice, $region, $age, $category){
+       $controller = new CostController();
+       return $controller->finalPrice($basePrice, $region, $age, $category);
+    });
 });
 
 Route::get('/home/{id}', function($id){
@@ -99,3 +112,12 @@ Auth::routes();
 Route::get('/register', 'RegionController@index')->name('register');
 
 
+Auth::routes();
+
+Route::get('/reports', 'DownloadReportsController@reports')->name('reports');
+
+
+
+Auth::routes();
+
+Route::get('/test', 'DownloadReportsController@test')->name('test');

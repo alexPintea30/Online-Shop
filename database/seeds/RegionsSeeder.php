@@ -13,8 +13,8 @@ class RegionsSeeder extends Seeder
     public function run()
     {
         $items = [
-            ['id'=> 1, 'name'=> 'straina'],
-            ['id'=> 2, 'name'=> 'romaneasca'],
+            ['id'=> 1, 'name'=> 'other'],
+            ['id'=> 2, 'name'=> 'RO'],
             ['id'=> 3, 'name'=> 'Alba'],
             ['id'=> 4, 'name'=> 'Arad'],
             ['id'=> 5, 'name'=> 'Arges'],

@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+
+use App\Author;
+use Illuminate\Support\Facades\DB;
 use App\book;
+use App\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Person;
 
 
 class BookController extends Controller
@@ -17,7 +24,26 @@ class BookController extends Controller
     public function index()
     {
         $carte= book::latest()->paginate(12);
-        return view('welcome',compact('carte'));
+        if(Auth::user()){
+            $personID = Auth::user()->personID;
+            $person = Person::where('id', '=', $personID)->get();
+            $region = Region::where('id', '=', $person[0]['judetID'])->get();
+        }
+        /*
+        $authors = [];
+        foreach($carte as $c){
+            $authorID = $c['authorID'];
+            $authorPersonID = Author::where('id', '=', $authorID)->get(['personID']);
+            $authors[$c['id']] = Person::where('id', '=', $authorPersonID)->get('judetID');
+        }
+        */
+        //dd($region["0"]["name"]);
+
+        return view('welcome',[
+            'carte' => $carte,
+            'person' => $person ?? "emptyPerson",
+            'region' => $region ?? "emptyRegion"
+        ]);
     }
 
     /**

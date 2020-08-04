@@ -1,35 +1,101 @@
-<?php
+@extends('layouts.app') <!-- aplic designul general al site-ului asupra pagini -->
+@section('content') <!--specific zona in care lucrez; intre footer si top nav bar -->
+
+<!-- Verificam daca userul care acceseaza pagina de reports e admin;
+Daca nu e admin, nu va putea accesa pagina destinata rapoartelor -->
+@if(auth()->check() && auth()->user()->isAdmin == 1)
 
 
 
-/*
-    $users = DB::table('client')
-    ->selectRaw('select(*) as client_count, Varsta')
-    ->where('Varsta', '=', 1)
-    ->groupBy('Varsta')
-    ->get();
+<div class="continut">
+    <!--form-ul care va culege datele; folosesc POST pentru a nu fi probleme cu length restrictions, eventual sensitive data.-->
+    <form action="Cele_Mai_Multe_Carti_Vandute_Pe_Judet.php" method="POST" >
+        <!-- dupa selectarea datelor, acestea vor fi preluate si folosite in paginire de form-uri,
+         gen Cele_Mai_Multe_Carti_Vandute_Pe_Judet.php -->
+
+        <p id="titlu_rapoarte">Alegeti judetul si perioada pentru care doriti rapoartele<br>
+            <br>
+            <br>
+        <?php
+        //Ne conectam la BD folosind extensia PDO.
+        $pdo = new PDO('mysql:host=localhost; dbname=laravel', 'root', '');
+
+        //setam statement-ul corespunzator datelor pe care le dorim, din tabela corespunzatore.
+        $sql = "SELECT name FROM regions";
+
+        //Pregatim select statement-ul de mai sus pentru rulare
+        $stmt = $pdo->prepare($sql);
+
+        //Executam statement-ul
+        $stmt->execute();
+
+        //Receptionam datele din BD prin metoda fetchAll.
+        $regions = $stmt->fetchAll();
+
+        ?>
+        <!-- select-ul corespunzator regiunilor pentru care se vor calcula rapoartele -->
+            <select name="judetul_ales" label="judetul_ales" class="lista_rapoarte">
+
+            <?php foreach($regions as $region): ?>
+            <!-- luam datele care ne intereseaza rand pe rand din BD si le implementam ca drop-list.-->
+                <option value="<?= $region['name']; ?>"><?= $region['name']; ?></option>
+                <?php endforeach; ?>
+
+            </select>
+
+            <br>
+            <br>
+            <!-- select-ul corespunzator perioadelor de timp pentru care se vor calcula rapoartele -->
+            <select name="datapicker" id="datapicker" class="lista_rapoarte" >
+
+                <option value="Astazi">Astazi</option>
+                <option value="In ultima saptamana">In ultima saptamana</option>
+                <option value="In ultima luna">In ultima luna</option>
+                <option value="In ultimele 6 luni">In ultimele 6 luni</option>
+                <option value="In ultimul an">In ultimul an</option>
+                <option value="Din toate timpurile">Din toate timpurile</option>
+
+            </select>
+            <br>
+            <br>
+
+            <!-- butonul de download principal, vizibil, care la click apeleaza functia "Trimite_formulare"-->
+            <input type="submit" id="btn1" value="Descarca Rapoarte" onclick="Trimite_formulare()">
+
+            <!-- butonul de download pentru al doilea raport, nu e vizibil, urmeaza a fi actionat in functia "Trimite_formulare" -->
+            <input type="submit" id="btn2" formaction="Top_Cumparatori_Volum-Cantitate.php" hidden="hidden" value="Submit R2" >
+
+            <!--butonul de download pentru al treilea raport, nu e vizibil, urmeaza a fi actionat in functia "Trimite_formulare" -->
+            <input type="submit" id="btn3" formaction="Cei_Mai_Bine_Vanduti_Autori-Volum.php" hidden="hidden" value="Submit R3">
 
 
-
-$results = DB::table('client')->select('Nume', 'Judet')->get();
-$results1 = DB::table('carte')->select('Titlu', 'Pret')->where('pret','>','50')->get();
-*/
-
-use Illuminate\Support\Facades\DB;
-
-echo "<h1> Still workin' on this one </h1>";
+    </form>
 
 
-$users = DB::table('multipliers_versions')
-    ->join('versions','multipliers_versions.version_id' ,'=','versions.id')
- //   ->join('carte', 'client.IDCarte', '=', 'carte.IDCarte')
-  //  ->select (DB::raw('MAX(carte.NrCarti) as maxim'))
-    ->where('versions.version_description', '=' , "Jan Version")
-    ->select('versions.*')
-    //->where('version_description', '=' , "Jan Version")
-    ->get();
-dd($users);
-//print_r($users);
+    <!--referinta la libraria de jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        //Functia care va actiona un click pe butoanele 2 & 3, actionata de un click pe butonul 1.
+        function Trimite_formulare()
+        {
+            //folosesc timeout pentru a nu bloca procesul de download; trebuie sa existe un delay intre ele.
+            setTimeout(function(){ $("#btn2").click();}, 3000);
+            setTimeout(function(){ $("#btn3").click();}, 6000);
+        }
+
+    </script>
+</div>
+
+@stop
+<!-- inchid template-ul de design. -->
 
 
-?>
+@else
+    <!-- Hiperlink catre pagina principala, in caz ca un utilizator ne-admin incearca sa acceseze pagina -->
+
+    <a style =  "text-align:center ;font-size: 20px"; href="/">Reveniti la pagina principala</a>
+
+@stop
+
+    @endif

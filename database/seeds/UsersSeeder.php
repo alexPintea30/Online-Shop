@@ -13,11 +13,11 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $items = [
-            ['id' => 1, 'email' => 'alexandra.pop@gmail.com', 'password'=>bcrypt('parola1'),'isAdmin'=> 0,'personID'=> 69],
-            ['id' => 2, 'email' => 'mihai.sima@gmail.com', 'password'=> bcrypt('parola2'),'isAdmin'=> 0,'personID'=> 70],
-            ['id' => 3, 'email' => 'maria.anton@gmail.com', 'password'=> bcrypt('parola3'),'isAdmin'=> 0,'personID'=> 71],
-            ['id' => 4, 'email' => 'adrian.ionescu@gmail.com', 'password'=> bcrypt('parola4'),'isAdmin'=> 0,'personID'=> 72],
-            ['id' => 5, 'email' => 'laura.anghel@gmail.com', 'password'=>bcrypt('parola5'),'isAdmin'=> 0,'personID'=> 73],
+            ['id' => 1, 'email' => 'alexandra.pop@gmail.com', 'password'=>bcrypt('parola1'),'isAdmin'=> 0,'personID'=> 69, 'isApproved' => 1],
+            ['id' => 2, 'email' => 'mihai.sima@gmail.com', 'password'=> bcrypt('parola2'),'isAdmin'=> 0,'personID'=> 70, 'isApproved' => 1],
+            ['id' => 3, 'email' => 'maria.anton@gmail.com', 'password'=> bcrypt('parola3'),'isAdmin'=> 0,'personID'=> 71, 'isApproved' => 1],
+            ['id' => 4, 'email' => 'adrian.ionescu@gmail.com', 'password'=> bcrypt('parola4'),'isAdmin'=> 0,'personID'=> 72, 'isApproved' => 1],
+            ['id' => 5, 'email' => 'laura.anghel@gmail.com', 'password'=>bcrypt('parola5'),'isAdmin'=> 0,'personID'=> 73, 'isApproved' => 1],
             ['id' => 6, 'email' => 'ioan.pancu@gmail.com', 'password'=> bcrypt('parola6'),'isAdmin'=> 0,'personID'=> 74],
             ['id' => 7, 'email' => 'bogdan.popescu@gmail.com', 'password'=> bcrypt('parola7'),'isAdmin'=> 0,'personID'=> 75],
             ['id' => 8, 'email' => 'ionela.brandusa@gmail.com', 'password'=> bcrypt('parola8'),'isAdmin'=> 0,'personID'=> 76],
@@ -34,6 +34,7 @@ class UsersSeeder extends Seeder
             ['id' => 19, 'email' => 'mihai.ghica@gmail.com', 'password'=> bcrypt('parola19'),'isAdmin'=> 0,'personID'=> 88],
             ['id' => 20, 'email' => 'john.doe@gmail.com', 'password'=> bcrypt('parola20'),'isAdmin'=> 1,'personID'=> 89],
             ['id' => 21, 'email' => 'jane.doe@gmail.com', 'password'=>bcrypt('parola21'),'isAdmin'=> 1,'personID'=> 90],
+            ['id' => 21, 'email' => 'se2019.polls@gmail.com', 'password'=>bcrypt('testperson'),'isAdmin'=> 0,'personID'=> 91],
 
         ];
         foreach ($items as $item) {
