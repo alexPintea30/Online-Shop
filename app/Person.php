@@ -8,14 +8,14 @@ class Person extends Model
 {
     public function autorul(){
         return $this->hasOne(author::class);
+
     }
 
-    public function judet(){
-        return $this->hasOne(region::class);
+    public function region(){
+        return $this->hasOne('App\Region','judetID');
     }
-
-    public function users(){
-        return $this->belongsToMany(user::class, 'users','personID');
+    public function user(){
+        return $this->hasOne('App\User','personID');
     }
-
+    protected $fillable=['nume','prenume','data_nasterii','judetID'];
 }

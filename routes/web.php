@@ -65,10 +65,6 @@ Route::get('/home/{id}', function($id){
    return "User:".$id;
 });
 
-Auth::routes();
-
-Route::get('/register', 'RegionController@index')->name('register');
-
 
 Auth::routes();
 
@@ -79,3 +75,9 @@ Route::get('/reports', 'DownloadReportsController@reports')->name('reports');
 Auth::routes();
 
 Route::get('/test', 'DownloadReportsController@test')->name('test');
+
+Auth::routes();
+
+Route::get('/register', 'RegionController@index')->name('register');
+
+Route::post('/register', 'Auth\RegisterController@create')->name('register');

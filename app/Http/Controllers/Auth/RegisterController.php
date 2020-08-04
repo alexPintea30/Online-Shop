@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Person;
 use App\Providers\RouteServiceProvider;
+use App\Region;
 use App\User;
+//use http\Env\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class RegisterController extends Controller
 {
@@ -40,6 +45,9 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    public function index(){
+        return view('auth/register');
+}
 
     /**
      * Get a validator for an incoming registration request.
@@ -47,27 +55,32 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(Request $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users',],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' =>['required']
         ]);
     }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
+    protected function create(Request $data)
     {
-        return User::create([
-            'name' => $data['name'],
+
+        $people=Person::create([
+          'nume'=>$data['first-name'],
+          'prenume'=>$data['last-name'],
+          'data_nasterii'=>$data['dob'],
+          'judetID'=>$data['county']
+             ]);
+
+
+     $user= User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'isAdmin'=> 0,
+
         ]);
+      $people->user()->save($user);
+         return $people;
     }
 }

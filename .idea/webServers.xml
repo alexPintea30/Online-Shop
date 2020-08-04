@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="adc3bd06-3d18-48b9-90ba-433762bce87d" name="practica_2020">
+      <webServer id="adc3bd06-3d18-48b9-90ba-433762bce87d" name="practica_2020 (project level)">
         <fileTransfer rootFolder="/var/www/html/practica" accessType="SFTP" host="thor.softexco.ro" port="5436" sshConfigId="2d22af43-31bb-4554-b9c2-1039ac51ffe5" sshConfig="practica_2020@thor.softexco.ro:5436 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
