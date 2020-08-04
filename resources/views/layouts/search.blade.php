@@ -34,11 +34,9 @@
     <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark static-top " >
         <div class="container-fluid">
             <div class="navbar-header">
-                @if(Auth::check())
-                    <a href="/home" class="navbar-brand"><img height="90px" src="/images/comrawpixel534885.png" alt="nu se poate incarca imaginea" style="padding-left: 30px"></a>
-                @else
+
                     <a href="/" class="navbar-brand"><img height="90px" src="/images/comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
-                @endif
+
             </div>
 
             <button  type="button " class="navbar-toggler " data-toggle="collapse" data-target="#navbarMenu"  >
@@ -49,8 +47,9 @@
 
             <div class="collapse navbar-collapse" id="navbarMenu" >
                 <div class="navbar-nav ml-auto search-box"  style="margin:20px;">
-                    <form class="form-inline" action="" method="">
-                    <input class="form-control mr-sm-2" type="text" name="" placeholder="Cautati dupa titlu/autor">
+                    <form   action="{{ route('cautare') }}" class="form-inline" method="GET">
+
+                    <input class="form-control mr-sm-2" type="text" name="searchstr" placeholder="Cautati dupa titlu/autor">
                     <button class="btn btn-dark my-sm-0" type="submit"><i class="fa fa-search" style="font-size:24px"></i></button>
                     </form>
                 </div>
