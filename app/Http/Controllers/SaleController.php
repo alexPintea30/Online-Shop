@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Book;
 use Carbon\Carbon;
 use App\Sale;
 use Illuminate\Http\Request;
@@ -34,7 +35,12 @@ class SaleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $req)
-    {   print_r($req->input());
+    {   if(!$req->cantitate)
+    {
+        $bookID = $req->book;
+        $book = Book::find($bookID);
+        return view('book',['book'=>$book]);
+    }
         $sale= new Sale;
         $sale->userID=$req->user;
         $sale->bookID = $req->book;

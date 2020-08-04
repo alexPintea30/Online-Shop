@@ -54,9 +54,8 @@ Route::get('/', function(Request $request){
     return view('welcome',compact('carte'));
 }
 );
-Route::get("/authFilter",'BookController@authFilter');
-Route::get("/guestFilter",'BookController@guestFilter');
 
+Route::get("/Filter",'BookController@priceFilter');
 
 
 Route::get("/testDB", function(){

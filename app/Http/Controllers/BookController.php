@@ -88,7 +88,10 @@ class BookController extends Controller
     }
 
     public function search(Request $request){
-
+    if(!$request->searchstr){
+        $carte= book::latest()->paginate(12);
+        return view ('welcome',compact('carte'));
+    }
         $string = $request->searchstr;
         $s = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);
         $carte = collect([]);
@@ -112,6 +115,8 @@ class BookController extends Controller
                                 });
                         });
                 })->paginate(12);
+
+
         }
 
 
@@ -119,42 +124,18 @@ class BookController extends Controller
         return view ('welcome',compact('carte'));
 
 }
-public function authFilter(Request $request){
-$min=$request->input('minvalue');
-$max=$request->input('maxvalue');
-$sort=$request->input('select');
-if($sort=='/')
-    $carte=Book::where('base_price','>',$min)->where('base_price','<',$max)->paginate(12);
-if($sort=='/?titlu=crescator')
-    $carte=Book::where('base_price','>',$min)->where('base_price','<',$max)->orderBy('title','asc')->paginate(12);
-if($sort=='/?titlu=descrescator')
-    $carte=Book::where('base_price','>',$min)->where('base_price','<',$max)->orderBy('title','desc')->paginate(12);
-if($sort=='/?autor=crescator')
-    $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
-        ->join('authors', 'books.authorID','=','authors.id')
-        ->join('people','authors.personID','=','people.id')
-        ->where('base_price','>',$min)
-        ->where('base_price','<',$max)
-        ->orderBy('people.prenume','asc')
-        ->orderBy('people.nume','asc')
-        ->orderBy('title','asc')->paginate(12);
-if($sort=='/?autor=descrescator')
-    $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
-        ->join('authors', 'books.authorID','=','authors.id')
-        ->join('people','authors.personID','=','people.id')
-        ->where('base_price','>',$min)
-        ->where('base_price','<',$max)
-        ->orderBy('people.prenume','asc')
-        ->orderBy('people.nume','asc')
-        ->orderBy('title','asc')->paginate(12);
-    return view ('welcome',compact('carte'));
-}
 
 
-public function guestFilter(Request $request){
+public function priceFilter(Request $request){
+   if(!$request->input('minvalue') || !$request->input('select')){
+       $carte= book::latest()->paginate(12);
+       return view ('welcome',compact('carte'));
+   }
+
     $min=$request->input('minvalue');
     $max=$request->input('maxvalue');
     $sort=$request->input('select');
+
     if($sort=='/')
         $carte=Book::where('base_price','>',$min)->where('base_price','<',$max)->paginate(12);
     if($sort=='/?titlu=crescator')

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
     <div class="sortari">
-        @Auth    <form action="/authFilter">
+        <form action="/Filter">
         Sortati dupa:<select name="select" onChange="window.location.href=this.value">
             <option value="/">Alege o optiune</option>
             <option  value="/?titlu=crescator" <?php echo (isset($_GET['titlu']) && $_GET['titlu'] == 'crescator') ? ' selected="selected"' : '' ; ?>>Titlu crescator</option>
@@ -17,26 +17,12 @@
             <label for="maxvalue">Max</label><input type="text" name="maxvalue">
             <button type="submit">Filtreaza</button>
         </form>
-        @endauth
-        @guest
-                <form action="/guestFilter">
-                    Sortati dupa:<select name="select" onChange="window.location.href=this.value">
-                        <option value="/">Alege o optiune</option>
-                        <option  value="/?titlu=crescator" <?php echo (isset($_GET['titlu']) && $_GET['titlu'] == 'crescator') ? ' selected="selected"' : '' ; ?>>Titlu crescator</option>
-                        <option  value="/?titlu=descrescator"<?php echo (isset($_GET['titlu']) && $_GET['titlu'] == 'descrescator') ? ' selected="selected"' : '' ; ?>>Titlu descrescator</option>
-                        <option  value="/?autor=crescator" <?php echo (isset($_GET['autor']) && $_GET['autor'] == 'crescator') ? ' selected="selected"' : '' ; ?>>Autor crescator</option>
-                        <option  value="/?autor=descrescator" <?php echo (isset($_GET['autor']) && $_GET['autor'] == 'descrescator') ? ' selected="selected"' : '' ; ?>>Autor descrescator</option>
-                    </select>
 
-                    Interval pret:
-                    <label for="minvalue">Min</label><input type="text" name="minvalue">
-                    <label for="maxvalue">Max</label><input type="text" name="maxvalue">
-                    <button type="submit">Filtreaza</button>
-                </form>
-        @endguest
+
     </div>
     <div class="produse">
     <div class="row" >
+
 
 
     @foreach($carte as $row)
