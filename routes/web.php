@@ -17,27 +17,18 @@ use App\Http\Controllers\CostController;
 
 Route::get('/', 'BookController@index');
 
-Route::get("/testDB", function(){
-
-});
-
 Route::get('/book/{bookID}','BookController@show');
+
 Route::get('/submit','SaleController@store');
+
 Route::get( '/succes',function(){
-return view('succes');
+    return view('succes');
 });
 
 Route::get('/cautare', 'BookController@search')->name('cautare');;
 
-
 Auth::routes();
-
 Route::get('/home', 'HomeController.php@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController.php@index')->name('home');
-
 
 Route::group(['prefix' => 'cost'], function(){
     /*
@@ -66,16 +57,15 @@ Route::get('/home/{id}', function($id){
 });
 
 Auth::routes();
-
 Route::get('/register', 'RegionController@index')->name('register');
 
 
 Auth::routes();
-
 Route::get('/reports', 'DownloadReportsController@reports')->name('reports');
 
 
+Auth::routes();
+Route::get('/test', 'DownloadReportsController@test')->name('test');
 
 Auth::routes();
-
-Route::get('/test', 'DownloadReportsController@test')->name('test');
+Route::get('/approve_users', 'ApproveUsersController@index')->name('approve_users');
