@@ -64,3 +64,8 @@ Auth::routes();
 
 Route::get('/reports', 'DownloadReportsController@reports')->name('reports');
 
+
+
+Auth::routes();
+
+Route::get('/test', 'DownloadReportsController@test')->name('test');

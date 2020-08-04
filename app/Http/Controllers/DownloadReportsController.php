@@ -11,6 +11,10 @@ class DownloadReportsController extends Controller
     {
         return view ('report');
     }
+    public function test()
+    {
+        return view ('test');
+    }
 
 }
 
