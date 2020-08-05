@@ -1,6 +1,8 @@
+
 @if(auth()->check() && auth()->user()->isAdmin == 1)
     <!-- Select all unapproved users to be shown in the page -->
     <?php
+    use Illuminate\Support\Facades\DB;
     $allUnapprovedUsersJSON = DB::table('users')->where('isApproved', '0')->get();
     $allUnapprovedUsers = json_decode($allUnapprovedUsersJSON, true);
     ?>
@@ -16,30 +18,6 @@
 
         <!-- Home Page Hyperlink -->
         <a style="text-align:center ;font-size: 20px"; href="/">Home Page</a>
-
-        <!-- Script for modifying the isApproved attribute -->
-        <script>
-            function approve(name)
-            {
-                <?php
-                $request = $_GET['id'];
-
-                $selectedUserID = 1;
-                DB::table('users')
-                ->where('id', $selectedUserID)
-                ->update(['isApproved' => 1]);
-                ?>
-            }
-
-
-        </script>
-
-        <!-- Script for sending email -->
-        <script>
-
-
-        </script>
-
     </head>
     <body>
 
@@ -67,8 +45,9 @@
                          <td>'.$entry["isApproved"].'</td>
                          <td>'.$entry["personID"].'</td>
                          <td>   <form action="/approve" method="GET">
-                                <input type="submit" id='.$entry["id"].' name="approve_user_button_'.$entry["id"].'"  onclick="approve(this.name)" class="btn btn-success" value="Approve" />
-                                <input type="hidden" name="hidden_approve_btn" value="'.$entry["id"].'" />
+                                <input type="submit" name="approve_user_button_'.$entry["id"].'"  class="btn btn-success" value="Approve" />
+                                <input type="hidden" name="hidden_id" value="'.$entry["id"].'" />
+                                <input type="hidden" name="hidden_email" value='.$entry["email"].' />
                                 </form>
                          </td>
                       </tr>';
@@ -87,7 +66,7 @@
     <h1 style="text-align:center; font-size: 50px" >G0 Aw4y w0lly h4ck3r!</h1>
     <br>
     Or, if you're not a hacker...
-    <a style="text-align:center ;font-size: 20px"; href="/">Home Page</a>
+    <a style="text-align:center ;font-size: 20px" href="/">Home Page</a>
 @endif
 
 

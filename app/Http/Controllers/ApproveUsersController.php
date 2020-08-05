@@ -12,16 +12,29 @@ class ApproveUsersController extends Controller
         return view ('approve_users');
     }
 
-    public function approve(Request $request)
+    public function updateIsApprovedInDatabase($userID)
     {
-        $userID = $request->hidden_approve_btn;
-        dd($userID);
-
         DB::table('users')
             ->where('id', $userID)
             ->update(['isApproved' => "1"]);
+    }
 
-        return view("approve_users");
+    public function sendNotifyingEmail($userEmail)
+    {
+        $userEmail = urldecode($userEmail); // Transform from abcd%40gmail.com to abcd@gmail.com
+
+
+    }
+
+    public function approve(Request $request)
+    {
+        $userID = $request->hidden_id;
+        $userEmail = $request->hidden_email;
+
+        //$this->updateIsApprovedInDatabase($userID);
+        $this->sendNotifyingEmail($userEmail);
+
+        return view("/approve_users");
     }
 
 
