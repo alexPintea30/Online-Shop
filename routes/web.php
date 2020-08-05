@@ -17,43 +17,7 @@ use App\Book;
 |
 */
 
-Route::get('/', function(Request $request){
-
-       if($request->has('titlu'))
-           if($request->input('titlu')=='crescator')
-           {    $carte= Book::orderBy('title','asc')->paginate(12);
-               return view('welcome',compact('carte'));;
-           }
-               else if($request->input('titlu')=='descrescator')
-               {    $carte= Book::orderBy('title','desc')->paginate(12);
-                   return view('welcome',compact('carte'));;
-               }
-       if($request->has('autor'))
-           if($request->input('autor')=='crescator')
-           {    $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
-               ->join('authors', 'books.authorID','=','authors.id')
-               ->join('people','authors.personID','=','people.id')
-               ->orderBy('people.prenume','asc')
-               ->orderBy('people.nume','asc')
-               ->orderBy('title','asc')->paginate(12);
-
-               return view('welcome',compact('carte'));;
-           }
-           else if($request->input('autor')=='descrescator')
-           { $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
-               ->join('authors', 'books.authorID','=','authors.id')
-               ->join('people','authors.personID','=','people.id')
-               ->orderBy('people.prenume','desc')
-               ->orderBy('people.nume','desc')
-               ->orderBy('title','desc')->paginate(12);
-
-               return view('welcome',compact('carte'));;
-           }
-
-    $carte= Book::latest()->paginate(12);
-    return view('welcome',compact('carte'));
-}
-);
+Route::get('/', 'BookController@index');
 
 Route::get("/Filter",'BookController@priceFilter');
 
