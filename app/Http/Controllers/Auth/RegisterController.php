@@ -13,7 +13,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
-
+use Illuminate\Support\Facades\Auth;
+use Exception;
 class RegisterController extends Controller
 {
     /*
@@ -57,30 +58,67 @@ class RegisterController extends Controller
      */
     protected function validator(Request $data)
     {
-        return Validator::make($data, [
+        return Validator::make($data->all(), [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users',],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'name' =>['required']
+            'password' => ['required', 'string', 'min:8','alphaNum','confirmed'],
+            'name' =>['required'],
+            'data_nasterii'=>['required'],
+            'prenume'=>['required']
         ]);
     }
     protected function create(Request $data)
     {
+        $data->validate([
+            'email'=>'required|email|max:255|unique:users',
+            'password'=> [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[0-9]/',
+                'regex:/[a-z]/',
 
-        $people=Person::create([
-          'nume'=>$data['first-name'],
-          'prenume'=>$data['last-name'],
-          'data_nasterii'=>$data['dob'],
-          'judetID'=>$data['county']
-             ]);
-
-
-     $user= User::create([
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'isAdmin'=> 0,
-
+            ],
         ]);
-      $people->user()->save($user);
-         return $people;
-    }
+
+        //validarea datelor
+        /*$this->validate($data, [
+            'email'=>'required|email|max:255|unique:users',
+
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[0-9]/',
+                'regex:/[a-z]/',
+
+            ],
+        ]);
+*/
+      try {
+
+
+          $user= User::create([
+              'email' => $data['email'],
+              'password' => Hash::make($data['password']),
+              'isAdmin'=> 0,
+
+          ]);
+
+     $people=Person::create([
+         'nume'=>$data['first-name'],
+         'prenume'=>$data['last-name'],
+         'data_nasterii'=>$data['dob'],
+         'judetID'=>$data['county']
+     ]);
+
+
+       $people->user()->save($user);
+
+       return view('succesRegistration');
+
+     }catch(Exception $e){
+          return back()->with('error', 'Contul este deja existent');
+      }
+
+     }
 }
