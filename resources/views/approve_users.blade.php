@@ -2,7 +2,6 @@
 @if(auth()->check() && auth()->user()->isAdmin == 1)
     <!-- Select all unapproved users to be shown in the page -->
     <?php
-    use Illuminate\Support\Facades\DB;
     $allUnapprovedUsersJSON = DB::table('users')->where('isApproved', '0')->get();
     $allUnapprovedUsers = json_decode($allUnapprovedUsersJSON, true);
     ?>
@@ -59,8 +58,6 @@
     </div>
     </body>
     </html>
-
-
 
 @else
     <h1 style="text-align:center; font-size: 50px" >G0 Aw4y w0lly h4ck3r!</h1>

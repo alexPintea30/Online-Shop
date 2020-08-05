@@ -72,3 +72,7 @@ Route::get('/approve_users', 'ApproveUsersController@index')->name('approve_user
 
 Auth::routes();
 Route::get('/approve', 'ApproveUsersController@approve');
+
+Auth::routes();
+Route::get('/view_approve_mail', function() { return new \App\Mail\ApproveMail(); });
+
