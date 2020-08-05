@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Author;
-use Illuminate\Support\Facades\DB;
 use App\book;
 use App\Region;
 use Illuminate\Http\Request;
@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Person;
 
+
 class BookController extends Controller
 {
     /**
@@ -19,9 +20,41 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $carte= book::latest()->paginate(12);
+        if($request->has('titlu'))
+            if($request->input('titlu')=='crescator')
+            {    $carte= Book::orderBy('title','asc')->paginate(12);
+                return view('welcome',compact('carte'));;
+            }
+            else if($request->input('titlu')=='descrescator')
+            {    $carte= Book::orderBy('title','desc')->paginate(12);
+                return view('welcome',compact('carte'));;
+            }
+        if($request->has('autor'))
+            if($request->input('autor')=='crescator')
+            {    $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
+                ->join('authors', 'books.authorID','=','authors.id')
+                ->join('people','authors.personID','=','people.id')
+                ->orderBy('people.prenume','asc')
+                ->orderBy('people.nume','asc')
+                ->orderBy('title','asc')->paginate(12);
+
+                return view('welcome',compact('carte'));;
+            }
+            else if($request->input('autor')=='descrescator')
+            { $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
+                ->join('authors', 'books.authorID','=','authors.id')
+                ->join('people','authors.personID','=','people.id')
+                ->orderBy('people.prenume','desc')
+                ->orderBy('people.nume','desc')
+                ->orderBy('title','desc')->paginate(12);
+
+                return view('welcome',compact('carte'));;
+            }
+
+        $carte= Book::latest()->paginate(12);
+
         if(Auth::user()){
             $personID = Auth::user()->personID;
             $person = Person::where('id', '=', $personID)->get();
@@ -74,7 +107,27 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
-        return view('book',['book'=>$book]);
+        if(Auth::user()){
+            $personID = Auth::user()->personID;
+            $person = Person::where('id', '=', $personID)->get();
+            $region = Region::where('id', '=', $person[0]['judetID'])->get();
+        }
+        /*
+        $authors = [];
+        foreach($carte as $c){
+            $authorID = $c['authorID'];
+            $authorPersonID = Author::where('id', '=', $authorID)->get(['personID']);
+            $authors[$c['id']] = Person::where('id', '=', $authorPersonID)->get('judetID');
+        }
+        */
+        //dd($region["0"]["name"]);
+
+        return view('book',[
+            'book' => $book,
+            'person' => $person ?? "emptyPerson",
+            'region' => $region ?? "emptyRegion"
+        ]);
+
     }
 
     /**
@@ -112,55 +165,66 @@ class BookController extends Controller
     }
 
     public function search(Request $request){
+    if(!$request->searchstr) {
+        $carte = book::latest()->paginate(12);
+        return view('welcome', compact('carte'));
+    }
 
-        $string = $request->searchstr;
-        $s = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);
-        $carte = collect([]);
+        $str = $request->searchstr;
 
-        foreach($s as $str)
+        $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
+            ->join('authors', 'books.authorID','=','authors.id')
+            ->join('people','authors.personID','=','people.id')->where('title', 'LIKE', '%' .$str. '%')
+            ->join('regions','regions.id','=','judetID')
+            ->orwhere('people.nume', 'LIKE', '%' .$str. '%')
+            ->orwhere('people.prenume', 'LIKE', '%' .$str. '%')
+            ->orwhere('regions.name', 'LIKE', '%' .$str. '%')
+            ->orwhere(DB::raw('CONCAT_WS(" ", nume, prenume)'), 'LIKE', '%' .$str. '%')
+            ->orwhere(DB::raw('CONCAT_WS(" ", prenume, nume)'), 'LIKE', '%' .$str. '%')
+            ->orwhere(DB::raw('CONCAT(prenume," ",nume," ",title)'), 'LIKE', '%' .$str. '%')
+            ->orwhere(DB::raw('CONCAT(nume," ",prenume," ",title)'), 'LIKE', '%' .$str. '%')
+            ->orwhere(DB::raw('CONCAT(title," ",prenume," ",nume)'), 'LIKE', '%' .$str. '%')
+            ->orwhere(DB::raw('CONCAT(title," ",nume," ",prenume)'), 'LIKE', '%' .$str. '%')
+            ->paginate(12);
 
-        {
-            $carte = Book::where('title', 'LIKE', '%' .$str. '%')
-                ->orwhereIN('authorID', function ($query) use ($str) {
-                    $query->select('id')
-                        ->from('authors')
-                        ->whereIn('personID', function ($query2) use ($str) {
-                            $query2->select('id')
-                                ->from('people')
-                                ->where('nume', 'LIKE', '%' .$str. '%')
-                                ->orwhere('prenume', 'LIKE', '%' .$str. '%')
-                                ->orwherein('judetID', function ($query3) use ($str) {
-                                    $query3->select('id')
-                                        ->from('regions')
-                                        ->where('name', 'LIKE', '%' .$str. '%');
-                                });
-                        });
-                })->paginate(12);
-        }
+        return view ('welcome',compact('carte'));
+}
 
 
-        if(Auth::user()){
-            $personID = Auth::user()->personID;
-            $person = Person::where('id', '=', $personID)->get();
-            $region = Region::where('id', '=', $person[0]['judetID'])->get();
-        }
-        /*
-        $authors = [];
-        foreach($carte as $c){
-            $authorID = $c['authorID'];
-            $authorPersonID = Author::where('id', '=', $authorID)->get(['personID']);
-            $authors[$c['id']] = Person::where('id', '=', $authorPersonID)->get('judetID');
-        }
-        */
-        //dd($region["0"]["name"]);
+public function priceFilter(Request $request){
+   if(!$request->input('minvalue') || !$request->input('select')){
+       $carte= book::latest()->paginate(12);
+       return view ('welcome',compact('carte'));
+   }
 
-        return view('welcome',[
-            'carte' => $carte,
-            'person' => $person ?? "emptyPerson",
-            'region' => $region ?? "emptyRegion"
-        ]);
+    $min=$request->input('minvalue');
+    $max=$request->input('maxvalue');
+    $sort=$request->input('select');
 
-       // return view ('welcome',compact('carte'));
-
+    if($sort=='/')
+        $carte=Book::where('base_price','>',$min)->where('base_price','<',$max)->paginate(12);
+    if($sort=='/?titlu=crescator')
+        $carte=Book::where('base_price','>',$min)->where('base_price','<',$max)->orderBy('title','asc')->paginate(12);
+    if($sort=='/?titlu=descrescator')
+        $carte=Book::where('base_price','>',$min)->where('base_price','<',$max)->orderBy('title','desc')->paginate(12);
+    if($sort=='/?autor=crescator')
+        $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
+            ->join('authors', 'books.authorID','=','authors.id')
+            ->join('people','authors.personID','=','people.id')
+            ->where('base_price','>',$min)
+            ->where('base_price','<',$max)
+            ->orderBy('people.prenume','asc')
+            ->orderBy('people.nume','asc')
+            ->orderBy('title','asc')->paginate(12);
+    if($sort=='/?autor=descrescator')
+        $carte=Book::select('books.id','authorID','title','base_price', 'image', 'stoc', 'descriere','categoryID')
+            ->join('authors', 'books.authorID','=','authors.id')
+            ->join('people','authors.personID','=','people.id')
+            ->where('base_price','>',$min)
+            ->where('base_price','<',$max)
+            ->orderBy('people.prenume','asc')
+            ->orderBy('people.nume','asc')
+            ->orderBy('title','asc')->paginate(12);
+    return view ('welcome',compact('carte'));
 }
 }

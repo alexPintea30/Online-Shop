@@ -3,6 +3,9 @@
 use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CostController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Book;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,13 @@ use App\Http\Controllers\CostController;
 
 Route::get('/', 'BookController@index');
 
+Route::get("/Filter",'BookController@priceFilter');
+
+
+Route::get("/testDB", function(){
+
+});
+
 Route::get('/book/{bookID}','BookController@show');
 
 Route::get('/submit','SaleController@store');
@@ -27,8 +37,15 @@ Route::get( '/succes',function(){
 
 Route::get('/cautare', 'BookController@search')->name('cautare');;
 
+
 Auth::routes();
+
 Route::get('/home', 'HomeController.php@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController.php@index')->name('home');
+
 
 Route::group(['prefix' => 'cost'], function(){
     /*
@@ -57,6 +74,7 @@ Route::get('/home/{id}', function($id){
 });
 
 Auth::routes();
+
 Route::get('/register', 'RegionController@index')->name('register');
 
 

@@ -27,8 +27,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+
 <header>
 
 <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark static-top " >
