@@ -66,8 +66,9 @@
                          <td>'.$entry["email"].'</td>
                          <td>'.$entry["isApproved"].'</td>
                          <td>'.$entry["personID"].'</td>
-                         <td>   <form method="GET">
+                         <td>   <form action="/approve" method="GET">
                                 <input type="submit" id='.$entry["id"].' name="approve_user_button_'.$entry["id"].'"  onclick="approve(this.name)" class="btn btn-success" value="Approve" />
+                                <input type="hidden" name="hidden_approve_btn" value="'.$entry["id"].'" />
                                 </form>
                          </td>
                       </tr>';

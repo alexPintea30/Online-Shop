@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ApproveUsersController extends Controller
@@ -10,6 +11,19 @@ class ApproveUsersController extends Controller
     {
         return view ('approve_users');
     }
+
+    public function approve(Request $request)
+    {
+        $userID = $request->hidden_approve_btn;
+        dd($userID);
+
+        DB::table('users')
+            ->where('id', $userID)
+            ->update(['isApproved' => "1"]);
+
+        return view("approve_users");
+    }
+
 
 
 }

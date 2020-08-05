@@ -69,3 +69,6 @@ Route::get('/test', 'DownloadReportsController@test')->name('test');
 
 Auth::routes();
 Route::get('/approve_users', 'ApproveUsersController@index')->name('approve_users');
+
+Auth::routes();
+Route::get('/approve', 'ApproveUsersController@approve');
