@@ -2,7 +2,7 @@
 @if(auth()->check() && auth()->user()->isAdmin == 1)
     <!-- Select all unapproved users to be shown in the page -->
     <?php
-    $allUnapprovedUsersJSON = DB::table('users')->where('isApproved', '0')->get();
+    $allUnapprovedUsersJSON = DB::table('users')->where('isApproved', '0')->where('isAdmin', '0')->get();
     $allUnapprovedUsers = json_decode($allUnapprovedUsersJSON, true);
     ?>
 

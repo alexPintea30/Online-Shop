@@ -104,7 +104,7 @@ class PeopleSeeder extends Seeder
             ['id' => 89, 'nume' => 'Doe', 'prenume'=>'John','data_nasterii'=>'1989-12-31','judetID'=> 39],
             ['id' => 90, 'nume' => 'Doe', 'prenume'=>'jane','data_nasterii'=>'1990-10-10','judetID'=> 19],
             ['id' => 91, 'nume' => 'Spaniol', 'prenume'=>'Horatiu','data_nasterii'=>'1990-10-10','judetID'=> 2],
-
+            ['id' => 92, 'nume' => 'Admin', 'prenume'=>'Admin','data_nasterii'=>'1990-10-10','judetID'=> 2]
         ];
 
 

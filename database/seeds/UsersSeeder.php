@@ -35,7 +35,7 @@ class UsersSeeder extends Seeder
             ['id' => 20, 'email' => 'john.doe@gmail.com', 'password'=> bcrypt('parola20'),'isAdmin'=> 1,'personID'=> 89],
             ['id' => 21, 'email' => 'jane.doe@gmail.com', 'password'=>bcrypt('parola21'),'isAdmin'=> 1,'personID'=> 90],
             ['id' => 21, 'email' => 'se2019.polls@gmail.com', 'password'=>bcrypt('testperson'),'isAdmin'=> 0,'personID'=> 91],
-
+            ['id' => 22, 'email' => 'bookstore.softex@gmail.com', 'password'=>bcrypt('bookadmin1'),'isAdmin'=> 1, 'personID' => 92]
         ];
         foreach ($items as $item) {
             User::updateOrCreate(['id' => $item['id']], $item);
