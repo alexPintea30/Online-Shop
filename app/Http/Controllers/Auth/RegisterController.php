@@ -60,15 +60,16 @@ class RegisterController extends Controller
     {
         return Validator::make($data->all(), [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users',],
-            'password' => ['required', 'string', 'min:8','alphaNum','confirmed'],
-            'name' =>['required'],
-            'data_nasterii'=>['required'],
-            'prenume'=>['required']
+            'password' => ['required', 'string','confirmed'],
         ]);
     }
     protected function create(Request $data)
     {
+        //validarea campurilor formularului
         $data->validate([
+            'first-name' => 'required|alpha',
+            'last-name' => 'required|alpha',
+            'dob' => 'date_format:Y-m-d|before:today',
             'email'=>'required|email|max:255|unique:users',
             'password'=> [
                 'required',
@@ -76,26 +77,10 @@ class RegisterController extends Controller
                 'min:8',
                 'regex:/[0-9]/',
                 'regex:/[a-z]/',
-
             ],
         ]);
-
-        //validarea datelor
-        /*$this->validate($data, [
-            'email'=>'required|email|max:255|unique:users',
-
-            'password' => [
-                'required',
-                'string',
-                'min:8',
-                'regex:/[0-9]/',
-                'regex:/[a-z]/',
-
-            ],
-        ]);
-*/
       try {
-
+       //popularea tabelelor aferente cu datele userului
 
           $user= User::create([
               'email' => $data['email'],

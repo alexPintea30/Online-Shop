@@ -66,7 +66,7 @@
                             <div class="col-md-6">
                                 <select name="county" id="county" class="form-control">
                                    @foreach($regionList as $county)
-                                        @if($county->name != 'romaneasca')
+                                        @if($county->name != 'RO')
                                         <option value="{{$county->id}}">{{$county->name}}</option>
                                         @endif
                                     @endforeach

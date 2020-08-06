@@ -78,6 +78,12 @@ Route::get('/test', 'DownloadReportsController@test')->name('test');
 
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Auth::routes();
+
 Route::get('/register', 'RegionController@index')->name('register');
 
 Route::post('/register', 'Auth\RegisterController@create')->name('register');

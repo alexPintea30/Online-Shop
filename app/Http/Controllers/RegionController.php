@@ -18,7 +18,7 @@ class RegionController extends Controller
         $regionList = Region::select('id','name')->get();
 
         foreach ($regionList as $county) {
-            if($county->name =='straina'){
+            if($county->name =='other'){
                 $county->name="I'm not from Romania";
             }
         }
