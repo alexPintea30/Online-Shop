@@ -18,7 +18,7 @@ class CreatePeopleTable extends Migration
             $table->string('nume');
             $table->string('prenume');
             $table->date('data_nasterii');
-            $table->unsignedBigInteger('judetID');
+            $table->unsignedBigInteger('judetID')->nullable();
             $table->foreign('judetID')->references('id')->on('regions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

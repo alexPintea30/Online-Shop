@@ -7,17 +7,24 @@
             <div class="card" style="margin:20px 0;">
                 <div class="card-header">{{ __('Register') }}</div>
 
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @endif
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                            <label for="first-name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
+                                <input id="first-name" type="text" class="form-control @error('first-name') is-invalid @enderror" name="first-name" value="{{ old('first-name') }}" required autocomplete="first-name" autofocus>
 
-                                @error('fname')
+                                @error('first-name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -26,12 +33,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
+                            <label for="last-name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
+                                <input id="last-name" type="text" class="form-control @error('last-name') is-invalid @enderror" name="last-name" value="{{ old('last-name') }}" required autocomplete="last-name" autofocus>
 
-                                @error('lname')
+                                @error('last-name')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -57,9 +64,11 @@
                             <label for="county" class="col-md-4 col-form-label text-md-right">{{ __('County') }}</label>
 
                             <div class="col-md-6">
-                                <select name="county" id="county" class="">
+                                <select name="county" id="county" class="form-control">
                                    @foreach($regionList as $county)
+                                        @if($county->name != 'RO')
                                         <option value="{{$county->id}}">{{$county->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @error('county')
@@ -89,11 +98,11 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" minlength="8">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Password must contain numbers and letters</strong>
                                     </span>
                                 @enderror
                             </div>

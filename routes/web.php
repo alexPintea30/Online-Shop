@@ -73,10 +73,6 @@ Route::get('/home/{id}', function($id){
    return "User:".$id;
 });
 
-Auth::routes();
-
-Route::get('/register', 'RegionController@index')->name('register');
-
 
 Auth::routes();
 Route::get('/reports', 'DownloadReportsController@reports')->name('reports');
@@ -94,3 +90,15 @@ Route::get('/approve', 'ApproveUsersController@approve');
 Auth::routes();
 Route::get('/view_approve_mail', function() { return new \App\Mail\ApproveMail(); });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Auth::routes();
+
+Route::get('/register', 'RegionController@index')->name('register');
+
+Route::post('/register', 'Auth\RegisterController@create')->name('register');

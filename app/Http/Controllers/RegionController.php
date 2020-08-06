@@ -16,6 +16,12 @@ class RegionController extends Controller
     public function index()
     {
         $regionList = Region::select('id','name')->get();
+
+        foreach ($regionList as $county) {
+            if($county->name =='other'){
+                $county->name="I'm not from Romania";
+            }
+        }
         return  view('auth/register',compact('regionList'));
     }
 
