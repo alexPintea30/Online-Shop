@@ -1,4 +1,4 @@
-@extends('layouts.app') <!-- aplic designul general al site-ului asupra pagini -->
+@extends('layouts.search') <!-- aplic designul general al site-ului asupra pagini -->
 @section('content') <!--specific zona in care lucrez; intre footer si top nav bar -->
 
 <!-- Verificam daca userul care acceseaza pagina de reports e admin;
@@ -18,7 +18,7 @@ Daca nu e admin, nu va putea accesa pagina destinata rapoartelor -->
             <br>
         <?php
         //Ne conectam la BD folosind extensia PDO.
-        $pdo = new PDO('mysql:host=localhost; dbname=laravel', 'root', '');
+        $pdo = new PDO('mysql:host=localhost; dbname=laravel', 'root', 'pass');
 
         //setam statement-ul corespunzator datelor pe care le dorim, din tabela corespunzatore.
         $sql = "SELECT name FROM regions";

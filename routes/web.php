@@ -3,7 +3,9 @@
 use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CostController;
-
+use App\Http\Controllers\VersionController;
+use App\Http\Controllers\MultiplierController;
+use App\Http\Controllers\VersionMultiplierController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +40,100 @@ Auth::routes();
 
 Route::get('/home', 'HomeController.php@index')->name('home');
 
+Route::group(['prefix' => 'version'], function(){
+    Route::get('/', function(){
+        $versionController = new VersionController();
+        return $versionController->index();
+    });
+
+    Route::get('/create', function (){
+        $versionController = new VersionController();
+        return $versionController->create();
+    })->name('addV');
+
+    Route::get('/edit', function (){
+        $versionController = new VersionController();
+        return $versionController->edit(0);
+    })->name('updateV');
+
+    Route::post('/', function(){
+       $versionController = new VersionController();
+       return $versionController->store();
+    });
+
+    Route::put('/', function(){
+        $versionController = new VersionController();
+        return $versionController->update();
+    });
+    Route::delete('/', function(){
+        $versionController = new VersionController();
+        $versionController->destroy(0);
+    });
+});
+
+
+Route::group(['prefix' => 'multiplier'], function(){
+    Route::get('/', function(){
+        $multiplierController = new MultiplierController();
+        return $multiplierController->index();
+    });
+
+    Route::get('/create', function (){
+        $multiplierController = new MultiplierController();
+        return $multiplierController->create();
+    })->name('addM');
+
+    Route::get('/edit', function (){
+        $multiplierController = new MultiplierController();
+        return $multiplierController->edit(0);
+    })->name('updateM');
+
+    Route::post('/', function(){
+        $multiplierController = new MultiplierController();
+        return $multiplierController->store();
+    });
+    Route::put('/', function(){
+       $multiplierController = new MultiplierController();
+       return $multiplierController->update();
+    });
+    Route::delete('/', function(){
+        $multiplierController = new MultiplierController();
+        $multiplierController->destroy();
+    });
+});
+
+
+
+Route::group(['prefix' => 'versionMultipliers'], function(){
+    Route::get('/', function(){
+        $versionMultipliersController = new VersionMultiplierController();
+        return $versionMultipliersController->index();
+    });
+
+    Route::get('/create', function (){
+        $versionMultipliersController = new VersionMultiplierController();
+        return $versionMultipliersController->create();
+    })->name('addVM');
+
+    Route::get('/edit', function (){
+        $versionMultipliersController = new VersionMultiplierController();
+        return $versionMultipliersController->edit();
+    })->name('updateVM');
+
+    Route::post('/', function(){
+        $versionMultipliersController = new VersionMultiplierController();
+        return $versionMultipliersController->store();
+    });
+    Route::put('/', function(){
+        $versionMultipliersController = new VersionMultiplierController();
+        return $versionMultipliersController->update();
+    });
+    Route::delete('/', function(){
+        $versionMultipliersController = new VersionMultiplierController();
+        return $versionMultipliersController->destroy();
+    });
+});
+
 
 Route::group(['prefix' => 'cost'], function(){
     /*
@@ -70,6 +166,15 @@ Auth::routes();
 Route::get('/register', 'RegionController@index')->name('register');
 
 
+Auth::routes();
+
+Route::get('/reports', 'DownloadReportsController@report')->name('report');
+
+
+
+Auth::routes();
+
+Route::get('/test', 'DownloadReportsController@test')->name('test');
 Auth::routes();
 
 Route::get('/reports', 'DownloadReportsController@reports')->name('reports');

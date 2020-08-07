@@ -64,7 +64,7 @@
                     @auth
 
                         @if(Auth::user()->isAdmin==1)
-                            <li class="nav-item"><a class="nav-link" href="/reports">Rapoarte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/version">Panel</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Clienti</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Adauga carte</a></li>
                         @endif
@@ -90,7 +90,7 @@
 
 
 
-<footer id="footersc" class="py-3 bg-dark ">
+<footer id="footersc" class="py-3 bg-dark fixed-bottom">
     <p><i class="fa fa-briefcase" style="font-size:24px;margin:5px;"></i> Adresa: Str. Bucuresti, nr. 5, Cluj-Napoca</p>
     <p><i class="fa fa-phone-square" style="font-size:24px;margin:5px;"></i> Telefon: 0746342020</p>
     <p><i class="fa fa-envelope" style="font-size:24px;margin:5px;"></i> Email: bookstoreonline@yahoo.com</p>
