@@ -6,6 +6,10 @@ use App\Http\Controllers\CostController;
 use App\Http\Controllers\VersionController;
 use App\Http\Controllers\MultiplierController;
 use App\Http\Controllers\VersionMultiplierController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Book;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +22,9 @@ use App\Http\Controllers\VersionMultiplierController;
 */
 
 Route::get('/', 'BookController@index');
+
+Route::get("/Filter",'BookController@priceFilter');
+
 
 Route::get("/testDB", function(){
 
@@ -184,3 +191,23 @@ Route::get('/reports', 'DownloadReportsController@reports')->name('reports');
 Auth::routes();
 
 Route::get('/test', 'DownloadReportsController@test')->name('test');
+
+Auth::routes();
+Route::get('/approve_users', 'ApproveUsersController@index')->name('approve_users');
+
+Auth::routes();
+Route::get('/approve', 'ApproveUsersController@approve');
+
+Auth::routes();
+Route::get('/view_approve_mail', function() { return new \App\Mail\ApproveMail(); });
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/register', 'RegionController@index')->name('register');
+
+Route::post('/register', 'Auth\RegisterController@create')->name('register');
