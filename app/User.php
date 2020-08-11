@@ -39,4 +39,8 @@ class User extends Authenticatable
     public function person(){
         return $this->hasOne('App\Person','personID');
     }
+    public function LoginSecurity()
+    {
+        return $this->hasOne('App\LoginSecurity');
+    }
 }
