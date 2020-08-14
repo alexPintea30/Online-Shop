@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\LoginSecurity;
+use App\Providers\RouteServiceProvider;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Session;
+
+
 
 class LoginSecurityController extends Controller
 {
@@ -14,11 +19,12 @@ class LoginSecurityController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->middleware('auth');
-    }
+             // parent::metoda();
+            $this->middleware('auth');
 
+    }
     /**
      * Show 2FA Setting form
      */
@@ -42,7 +48,6 @@ class LoginSecurityController extends Controller
             'secret' => $secret_key,
             'google2fa_url' => $google2fa_url
         );
-
         return view('auth.2fa_settings')->with('data', $data);
     }
 
@@ -72,32 +77,18 @@ class LoginSecurityController extends Controller
         $google2fa = (new \PragmaRX\Google2FAQRCode\Google2FA());
 
         $secret = $request->input('secret');
-        $valid = $google2fa->verifyKey($user->loginSecurity->google2fa_secret, $secret);
+        $valid = $google2fa->verifyKey($user->LoginSecurity->google2fa_secret, $secret);
+
 
         if($valid){
+            Session::put('cod_ok','ok');
+
             $user->loginSecurity->google2fa_enable = 1;
             $user->loginSecurity->save();
-            return redirect('2fa')->with('success',"2FA is enabled successfully.");
-        }else{
+            return redirect('/home')->with('success',"2FA is enabled successfully.");
+        }
+        else {
             return redirect('2fa')->with('error',"Invalid verification Code, Please try again.");
         }
-    }
-
-    /**
-     * Disable 2FA
-     */
-    public function disable2fa(Request $request){
-        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
-            // The passwords matches
-            return redirect()->back()->with("error","Your password does not matches with your account password. Please try again.");
-        }
-
-        $validatedData = $request->validate([
-            'current-password' => 'required',
-        ]);
-        $user = Auth::user();
-        $user->loginSecurity->google2fa_enable = 0;
-        $user->loginSecurity->save();
-        return redirect('/');
     }
 }

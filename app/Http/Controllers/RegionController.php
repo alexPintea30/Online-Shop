@@ -12,6 +12,7 @@ class RegionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     //functia index returneaza din db toate judetele pt a le folosi la inregistrarea userului
     public function index()
     {

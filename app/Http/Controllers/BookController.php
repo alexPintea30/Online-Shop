@@ -7,6 +7,7 @@ use App\Author;
 use App\book;
 use App\Region;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -20,6 +21,19 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+  public function __construct()
+  {
+      $this->middleware(function ($request, $next) {
+// fetch session and use it in entire class with constructor
+          $info = session()->has('cod_ok');
+          $is_auth=Auth::check();
+          if($is_auth && !$info){
+              Redirect::to('/2fa')->send();;
+          }
+            return $next($request);
+        });
+  }
+
     public function index(Request $request)
     {
         if($request->has('titlu'))

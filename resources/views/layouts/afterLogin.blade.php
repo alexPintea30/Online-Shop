@@ -33,46 +33,23 @@
 
 <header>
 
-<nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark static-top " >
-    <div class="container-fluid">
-        <div class="navbar-header">
-        <a href="/" class="navbar-brand"><img height="90px" src="/images/comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
+    <nav id="navbar" class="navbar navbar-expand-md navbar-dark bg-dark static-top " >
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="" class="navbar-brand"><img height="90px" src="/images/comrawpixel534885.png" alt="nu se poate incarca" style="padding-left: 30px"></a>
+            </div>
+
+            <button  type="button " class="navbar-toggler " data-toggle="collapse" data-target="#navbarMenu"  >
+                <span class="navbar-toggler-icon ml-auto"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu" >
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#footersc">Contact</a></li>
+                </ul>
+            </div>
         </div>
-
-        <button  type="button " class="navbar-toggler " data-toggle="collapse" data-target="#navbarMenu"  >
-            <span class="navbar-toggler-icon ml-auto"></span>
-        </button>
-
-    <div class="collapse navbar-collapse" id="navbarMenu" >
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="#footersc">Contact</a></li>
-            @guest
-                @if (Route::has('register'))
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                @endif
-                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user-circle-o" style="font-size:25px"></i>Login</a></li>
-            @endguest
-            @auth
-
-
-                @if(Auth::user()->isAdmin==1)
-                    <li class="nav-item"><a class="nav-link" href="/reports">Rapoarte</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Clienti</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Adauga carte</a></li>
-
-                @endif
-                <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-circle-o" style="font-size:25px"></i>Contul meu</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">Logout</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-            @endauth
-        </ul>
-    </div>
-    </div>
-</nav>
+    </nav>
 </header>
 
 

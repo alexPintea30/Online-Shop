@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.afterLogin')
 @section('content')
     <div class="container">
         <div class="row justify-content-md-center">
@@ -37,6 +37,7 @@
                                 {{ csrf_field() }}
                                 <div class="form-group{{ $errors->has('verify-code') ? ' has-error' : '' }}">
                                     <label for="secret" class="control-label">Authenticator Code</label>
+                                    <input id="ceva" type="name" class="form-control col-md-4" name="ceva" required>
                                     <input id="secret" type="password" class="form-control col-md-4" name="secret" required>
                                     @if ($errors->has('verify-code'))
                                         <span class="help-block">
@@ -48,23 +49,23 @@
                                     Enable 2FA
                                 </button>
                             </form>
-                        @elseif($data['user']->loginSecurity->google2fa_enable)
-                            <div class="alert alert-success">
-                                2FA is currently <strong>enabled</strong> on your account.
-                            </div>
-                            <p>Pentru ca logarea dumneavoastra sa fie completa introduceti din nou parola</p>
-                            <form class="form-horizontal" method="POST" action="{{ route('disable2fa') }}">
+                        @elseif($data['user']->LoginSecurity->google2fa_enable)
+                            2. Enter the pin from Google Authenticator app:<br/><br/>
+                            <form class="form-horizontal" method="POST" action="{{ route('enable2fa') }}">
                                 {{ csrf_field() }}
-                                <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
-                                    <label for="change-password" class="control-label">Current Password</label>
-                                    <input id="current-password" type="password" class="form-control col-md-4" name="current-password" required>
-                                    @if ($errors->has('current-password'))
+                                <div class="form-group{{ $errors->has('verify-code') ? ' has-error' : '' }}">
+                                    <label for="secret" class="control-label">Authenticator Code</label>
+                                    <input id="ceva" type="name" class="form-control col-md-4" name="ceva" required>
+                                    <input id="secret" type="password" class="form-control col-md-4" name="secret"  required>
+                                    @if ($errors->has('verify-code'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('current-password') }}</strong>
+                                        <strong>{{ $errors->first('verify-code') }}</strong>
                                         </span>
                                     @endif
                                 </div>
-                                <button type="submit" class="btn btn-primary ">Disable 2FA</button>
+                                <button type="submit" class="btn btn-primary">
+                                    Enable 2FA
+                                </button>
                             </form>
                         @endif
                     </div>

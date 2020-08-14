@@ -44,7 +44,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        print_r('text');
     }
     public function index(){
         return view('auth/register');
@@ -99,7 +99,7 @@ class RegisterController extends Controller
 
        $people->user()->save($user);
 
-       return view('succesRegistration');
+       return view('/succesRegistration');
 
      }catch(Exception $e){
           return back()->with('error', 'Contul este deja existent');
